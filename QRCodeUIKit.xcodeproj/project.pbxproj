@@ -22,6 +22,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		8904797A1FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 890479781FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.h */; };
+		8904797B1FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 890479791FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.m */; };
+		8904797E1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8904797C1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.h */; };
+		8904797F1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8904797D1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.m */; };
 		89B311001FFB7CD9000D07CB /* QRCodeUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 89B310FE1FFB7CD9000D07CB /* QRCodeUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		89B3110A1FFB7EF4000D07CB /* QuickTextQRResultController.h in Headers */ = {isa = PBXBuildFile; fileRef = 89B311081FFB7EF4000D07CB /* QuickTextQRResultController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		89B3110B1FFB7EF4000D07CB /* QuickTextQRResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B311091FFB7EF4000D07CB /* QuickTextQRResultController.m */; };
@@ -34,6 +38,10 @@
 /* Begin PBXFileReference section */
 		146FF6508459AEC46E971BA0 /* Pods-QRCodeUIKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QRCodeUIKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-QRCodeUIKit/Pods-QRCodeUIKit.release.xcconfig"; sourceTree = "<group>"; };
 		4EADF8C736C4CB159204EBD9 /* Pods_QRCodeUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QRCodeUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		890479781FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+QRCodeUIKit.h"; sourceTree = "<group>"; };
+		890479791FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+QRCodeUIKit.m"; sourceTree = "<group>"; };
+		8904797C1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+QRCodeUIKit.h"; sourceTree = "<group>"; };
+		8904797D1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+QRCodeUIKit.m"; sourceTree = "<group>"; };
 		89B310FB1FFB7CD9000D07CB /* QRCodeUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QRCodeUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89B310FE1FFB7CD9000D07CB /* QRCodeUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeUIKit.h; sourceTree = "<group>"; };
 		89B310FF1FFB7CD9000D07CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +86,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		890479771FFBCC9E00B0DA41 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				890479781FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.h */,
+				890479791FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.m */,
+				8904797C1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.h */,
+				8904797D1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		89B310F11FFB7CD9000D07CB = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				89B310FE1FFB7CD9000D07CB /* QRCodeUIKit.h */,
+				890479771FFBCC9E00B0DA41 /* Categories */,
 				89B311061FFB7DF0000D07CB /* QuickQRCodeScanController */,
 				89B311071FFB7E62000D07CB /* QuickTextQRResultController */,
 				89B310FF1FFB7CD9000D07CB /* Info.plist */,
@@ -163,6 +183,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8904797A1FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.h in Headers */,
+				8904797E1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.h in Headers */,
 				89B311001FFB7CD9000D07CB /* QRCodeUIKit.h in Headers */,
 				89B311311FFB8B60000D07CB /* QuickQRCodeScanController.h in Headers */,
 				89B3110A1FFB7EF4000D07CB /* QuickTextQRResultController.h in Headers */,
@@ -337,7 +359,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8904797F1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.m in Sources */,
 				89B311321FFB8B60000D07CB /* QuickQRCodeScanController.m in Sources */,
+				8904797B1FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.m in Sources */,
 				89B3110B1FFB7EF4000D07CB /* QuickTextQRResultController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
