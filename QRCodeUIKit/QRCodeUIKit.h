@@ -5,6 +5,11 @@
 //  Created by pcjbird on 2018/1/2.
 //  Copyright © 2018年 Zero Status. All rights reserved.
 //
+//  框架名称:QRCodeUIKit
+//  框架功能:一款让扫码变得简单的视图控制器。
+//  修改记录:
+//     pcjbird    2018-01-02  Version:1.0.0 Build:201801020001
+//                            1.首次发布SDK版本
 
 #import <UIKit/UIKit.h>
 
