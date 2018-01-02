@@ -7,3 +7,4 @@
 [![GitHub release](https://img.shields.io/github/release/pcjbird/QRCodeUIKit.svg)](https://github.com/pcjbird/QRCodeUIKit/releases)
 
 # QRCodeUIKit
+一款让扫码变得简单的视图控制器。
