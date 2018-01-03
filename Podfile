@@ -10,5 +10,6 @@ target 'QRCodeUIKit' do
 
   # Pods for QRCodeUIKit
   pod 'ZXingObjC'
+  pod 'Toast'
   pod 'TTTAttributedLabel'
 end

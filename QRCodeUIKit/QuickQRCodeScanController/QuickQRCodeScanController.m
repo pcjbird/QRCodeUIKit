@@ -10,89 +10,71 @@
 #import "UIViewController+QRCodeUIKit.h"
 #import "UINavigationController+QRCodeUIKit.h"
 #import <ZXingObjC/ZXingObjC.h>
+#import <Toast/Toast.h>
+#import "QuickQRCodeScanView.h"
+#import "QuickTextQRResultController.h"
+
 
 #define SDK_BUNDLE [NSBundle bundleWithPath:[[NSBundle bundleForClass:[QuickQRCodeScanController class]] pathForResource:@"QRCodeUIKit" ofType:@"bundle"]]
 
 @interface QuickQRCodeScanController ()<ZXCaptureDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
-    NSTimer * scanLineTimer;
-    
-    //UIButton*      btnOpenTorch;
-    NSString*      resultText;
-    
-    //AlignedUIImageView *bottomAdView;
+    NSString*      _resultText;
     CGAffineTransform _captureSizeTransform;
 }
+//返回按钮
+@property (nonatomic, strong) UIBarButtonItem *backItem;
+@property (nonatomic, strong) QuickQRCodeScanViewStyle *style;
+@property (nonatomic, strong) QuickQRCodeScanView * scanView;
+@property (nonatomic, strong) UILabel* lblScanTip;
+@property (nonatomic, strong) UIView *bottomView;
+//相册
+@property (nonatomic, strong) UIButton *btnAlbum;
+//闪光灯
+@property (nonatomic, strong) UIButton *btnTorch;
+//我的二维码
+@property (nonatomic, strong) UIButton *btnMyQR;
+//可以扫什么
+@property (nonatomic, strong) UIButton *btnQA;
+
 @property (nonatomic, strong) ZXCapture *capture;
-@property (nonatomic, strong) UIImageView *scanRectView;
-@property (nonatomic, strong) UIImageView *scanLine;
+
 @end
 
 @implementation QuickQRCodeScanController
+
+
+-(instancetype)init
+{
+    if(self = [super init])
+    {
+        [self initVariables];
+    }
+    return self;
+}
+
+-(void) initVariables
+{
+    _resultText = nil;
+    _style = [QuickQRCodeScanViewStyle new];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     self.qrcodeuikit_NavBarBgAlpha = @"0.0";
-    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [self updateLeftBarButtonItems];
     
-    /*resultText = nil;
-    if (!scanLineTimer)
-    {
-        scanLineTimer = [NSTimer scheduledTimerWithTimeInterval:0.0075f target:self selector:@selector(UpdateScanLine:) userInfo:nil repeats:YES];
-    }*/
+    _resultText = nil;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*0.3f), dispatch_get_main_queue(), ^{
+        [_scanView startScanAnimation];
+    });
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-/*
-    if (scanLineTimer)
-    {
-        [scanLineTimer invalidate];
-        scanLineTimer = nil;
-    }*/
-    
-    {
-        UIBarButtonItem *appearance = [UIBarButtonItem appearance];
-        UIColor * tintColor = appearance.tintColor;
-        if([tintColor isKindOfClass:[UIColor class]])
-        {
-            self.navigationItem.backBarButtonItem.tintColor = tintColor;
-        }
-        else
-        {
-            self.navigationItem.backBarButtonItem.tintColor = nil;
-        }
-    }
-    
-    {
-        UINavigationBar *apperance = [UINavigationBar appearance];
-        if([apperance.tintColor isKindOfClass:[UIColor class]])
-        {
-            self.navigationController.navigationBar.tintColor = apperance.tintColor;
-        }
-        else
-        {
-            self.navigationController.navigationBar.tintColor = nil;
-        }
-        NSDictionary<NSAttributedStringKey, id> *titleTextAttributes = [apperance titleTextAttributes];
-        if([titleTextAttributes isKindOfClass:[NSDictionary class]])
-        {
-            UIColor *titleColor = [titleTextAttributes objectForKey:NSForegroundColorAttributeName];
-            if([titleColor isKindOfClass:[UIColor class]])
-            {
-                [self.navigationController.navigationBar setTitleTextAttributes: @{NSForegroundColorAttributeName:titleColor}];
-            }
-            else
-            {
-                NSMutableDictionary<NSAttributedStringKey, id> * newTitleTextAttributes = [self.navigationController.navigationBar.titleTextAttributes mutableCopy];
-                [newTitleTextAttributes removeObjectForKey:NSForegroundColorAttributeName];
-                [self.navigationController.navigationBar setTitleTextAttributes: [newTitleTextAttributes copy]];
-            }
-        }
-    }
+    [_scanView stopScanAnimation];
     [super viewWillDisappear:animated];
     
 }
@@ -100,8 +82,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = NSLocalizedStringFromTableInBundle(@"Scan", @"Localizable", SDK_BUNDLE, nil);
-    self.navigationController.delegate = self;
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.hidesBackButton = YES;
+    [self updateTitleView];
+    self.view.backgroundColor = [UIColor blackColor];
     self.hidesBottomBarWhenPushed = YES;
     self.edgesForExtendedLayout = UIRectEdgeAll;
     self.extendedLayoutIncludesOpaqueBars = NO;
@@ -119,6 +102,189 @@
     [self.view.layer addSublayer:self.capture.layer];
     self.capture.delegate = self;
     [self applyOrientation];
+    [self addScanView];
+    [self addTipView];
+    [self addBottomView];
+}
+
+-(void) addScanView
+{
+    if([_scanView isKindOfClass:[UIView class]]) return;
+    _scanView = [[QuickQRCodeScanView alloc] initWithFrame:self.view.bounds style:_style];
+    _scanView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:_scanView];
+    
+}
+
+-(void) addTipView
+{
+    if([_lblScanTip isKindOfClass:[UILabel class]]) return;
+    CGRect scanAreaRect = _scanView.scanAreaRect;
+    UILabel * _lblScanTip= [UILabel new];
+    _lblScanTip.backgroundColor = [UIColor clearColor];
+    _lblScanTip.numberOfLines = 0;
+    _lblScanTip.textColor=[UIColor colorWithWhite:1.0f alpha:0.85f];
+    _lblScanTip.font = [UIFont systemFontOfSize:14.0f];
+    _lblScanTip.text = [self scanTipText];
+    _lblScanTip.textAlignment = NSTextAlignmentJustified;
+    CGSize size = [_lblScanTip sizeThatFits:CGSizeMake(CGRectGetWidth(scanAreaRect), HUGE)];
+    _lblScanTip.frame = CGRectMake((CGRectGetWidth([UIScreen mainScreen].bounds) - size.width)/2, CGRectGetMaxY(scanAreaRect) + 25.0f, size.width, size.height);
+    _lblScanTip.clipsToBounds = YES;
+    [self.view addSubview:_lblScanTip];
+}
+
+-(NSString *) scanTipText
+{
+    return NSLocalizedStringFromTableInBundle(@"ScanTip", @"Localizable", SDK_BUNDLE, nil);
+}
+
+
+-(void)addBottomView
+{
+    if ([_bottomView isKindOfClass:[UIView class]]) return;
+    BOOL isIPhoneX = (CGRectGetHeight([UIScreen mainScreen].bounds) == 812.0f);
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.bounds)- 100 - (isIPhoneX ? 34 : 0), CGRectGetWidth(self.view.frame), 100)];
+    _bottomView.backgroundColor = [UIColor clearColor];
+    
+    [self.view addSubview:_bottomView];
+    CGFloat width = 65.0f;
+    CGFloat height = 87.0f;
+    
+    NSInteger totalBtn = 2;
+    NSString *myQRText = [self myQRText];
+    BOOL bMyQRBtnSupport = ([myQRText isKindOfClass:[NSString class]] && [myQRText length] > 0);
+    if(bMyQRBtnSupport)
+    {
+        totalBtn += 1;
+    }
+    if([self supportQABtn])
+    {
+        totalBtn += 1;
+    }
+    
+    CGFloat flexibleWidth = CGRectGetWidth(_bottomView.frame)/totalBtn;
+    
+    
+    self.btnAlbum = [[UIButton alloc] init];
+    _btnAlbum.bounds = CGRectMake(0, 0, width, height);
+    _btnAlbum.center = CGPointMake(flexibleWidth*0.5f, CGRectGetHeight(_bottomView.frame)/2);
+    [_btnAlbum setImage:[UIImage imageNamed:@"qrcode_scan_btn_album_normal" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_btnAlbum setImage:[UIImage imageNamed:@"qrcode_scan_btn_album_highlight" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
+    [_btnAlbum addTarget:self action:@selector(QRCodeFromAlbum:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.btnTorch = [[UIButton alloc] init];
+    _btnTorch.bounds = CGRectMake(0, 0, width, height);
+    _btnTorch.center = CGPointMake(flexibleWidth*1.5f, CGRectGetHeight(_bottomView.frame)/2);
+    [_btnTorch setImage:[UIImage imageNamed:@"qrcode_scan_btn_opentorch_normal" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+    [_btnTorch setImage:[UIImage imageNamed:@"qrcode_scan_btn_closetorch_normal" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateSelected];
+    [_btnTorch addTarget:self action:@selector(OnTorchBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+     if(bMyQRBtnSupport)
+     {
+         self.btnMyQR = [[UIButton alloc]init];
+         _btnMyQR.bounds = CGRectMake(0, 0, width, height);
+         _btnMyQR.center = CGPointMake(flexibleWidth*2.5f, CGRectGetHeight(_bottomView.frame)/2);
+         [_btnMyQR setImage:[UIImage imageNamed:@"qrcode_scan_btn_myqrcode_normal" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+         [_btnMyQR setImage:[UIImage imageNamed:@"qrcode_scan_btn_myqrcode_highlight" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
+         [_btnMyQR addTarget:self action:@selector(OnMyQRBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+     }
+
+     if([self supportQABtn])
+     {
+         self.btnQA = [[UIButton alloc]init];
+         _btnQA.bounds = CGRectMake(0, 0, width, height);
+         _btnQA.center = CGPointMake(flexibleWidth*(bMyQRBtnSupport ? 3.5f : 2.5f), CGRectGetHeight(_bottomView.frame)/2);
+         [_btnQA setImage:[UIImage imageNamed:@"qrcode_scan_btn_qa_normal" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+         [_btnQA addTarget:self action:@selector(OnQABtnClick:) forControlEvents:UIControlEventTouchUpInside];
+         
+         [_bottomView addSubview:_btnAlbum];
+         [_bottomView addSubview:_btnTorch];
+         [_bottomView addSubview:_btnMyQR];
+         [_bottomView addSubview:_btnQA];
+     }
+   
+}
+                                   
+                                   
+-(void)OnTorchBtnClick:(id)sender
+{
+    if (!self.capture.hasTorch)
+    {
+        [self.view makeToast:NSLocalizedStringFromTableInBundle(@"Your device has no torch.", @"Localizable", SDK_BUNDLE, nil) duration:3.0f position:CSToastPositionCenter];
+        return;
+    }
+    
+    self.capture.torch = !self.capture.torch;
+    ((UIButton*)sender).selected = self.capture.torch;
+}
+
+-(NSString *)myQRText
+{
+    return nil;
+}
+
+-(void)OnMyQRBtnClick:(id)sender
+{
+    
+}
+
+-(BOOL)supportQABtn
+{
+    return YES;
+}
+
+-(void)OnQABtnClick:(id)sender
+{
+    
+}
+
+#pragma mark - 更新标题
+-(void) updateTitleView
+{
+    UILabel *titleLabel = [UILabel new];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.text = NSLocalizedStringFromTableInBundle(@"Scan", @"Localizable", SDK_BUNDLE, nil);
+    titleLabel.textAlignment = NSTextAlignmentJustified;
+    titleLabel.font = [UIFont systemFontOfSize:18.0f];
+    [titleLabel sizeToFit];
+    self.navigationItem.titleView = titleLabel;
+}
+
+#pragma mark - 更新导航左侧按钮
+-(void) updateLeftBarButtonItems
+{
+    if(self.navigationController.viewControllers.count > 1)
+    {
+        self.navigationItem.leftBarButtonItems = @[self.backItem];
+    }
+    else
+    {
+        self.navigationItem.leftBarButtonItems = @[];
+    }
+}
+
+#pragma mark - 返回按钮
+- (UIBarButtonItem *)backItem
+{
+    if (!_backItem)
+    {
+        _backItem = [[UIBarButtonItem alloc] initWithImage:[self resolvedBackIndicatorImage] style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
+        _backItem.tintColor = [UIColor whiteColor];
+    }
+    return _backItem;
+}
+
+#pragma mark - 返回按钮图标
+-(UIImage *)resolvedBackIndicatorImage
+{
+    return [[UIImage imageNamed:@"navbar_return" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+}
+
+#pragma mark - 返回
+-(void) goBack:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -163,7 +329,8 @@
 - (void)applyRectOfInterest:(UIInterfaceOrientation)orientation {
     CGFloat scaleVideo, scaleVideoX, scaleVideoY;
     CGFloat videoSizeX, videoSizeY;
-    CGRect transformedVideoRect = self.scanRectView.frame;
+    CGRect scanAreaRect = _scanView.scanAreaRect;
+    CGRect transformedVideoRect = scanAreaRect;
     if([self.capture.sessionPreset isEqualToString:AVCaptureSessionPreset1920x1080]) {
         videoSizeX = 1080;
         videoSizeY = 1920;
@@ -255,21 +422,24 @@
 
 - (void)captureResult:(ZXCapture *)capture result:(ZXResult *)result {
     if (!result) return;
-    if (resultText) return;
+    if (_resultText) return;
     // We got a result. Display information about the result onscreen.
     NSString *formatString = [self barcodeFormatToString:result.barcodeFormat];
     NSString *display = [NSString stringWithFormat:@"Scanned!\n\nFormat: %@\n\nContents:\n%@", formatString, result.text];
-    //[self.decodedLabel performSelectorOnMainThread:@selector(setText:) withObject:display waitUntilDone:YES];
     NSLog(@"%@",display);
-    resultText = result.text;
+    _resultText = result.text;
     // Vibrate
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    /*[MobClick event:@"qrcodeScanResultEvent"];
-    if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:result.text]] || ![AppDelegate handleURL:result.text withRootViewController:self])
+    BOOL bHandled = FALSE;
+    if(self.resultHandler && [self.resultHandler conformsToProtocol:@protocol(QuickQRCodeScanResultHandler)])
     {
-        TextQRResultViewController* textQRVC = [[TextQRResultViewController alloc] initWithQRText:resultText];
+        bHandled = [self.resultHandler handleResult:_resultText withQRCodeScanController:self];
+    }
+    if(!bHandled)
+    {
+        QuickTextQRResultController * textQRVC = [[QuickTextQRResultController alloc] initWithText:_resultText];
         [self.navigationController pushViewController:textQRVC animated:YES];
-    }*/
+    }
 }
 
 -(void)QRCodeFromAlbum:(id)sender
@@ -287,7 +457,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    if (resultText) return;
+    if (_resultText) return;
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
     
     CGImageRef imageToDecode = image.CGImage;  // Given a CGImage in which we are looking for barcodes
@@ -295,16 +465,12 @@
     ZXLuminanceSource *source = [[ZXCGImageLuminanceSource alloc] initWithCGImage:imageToDecode];
     ZXBinaryBitmap *bitmap = [ZXBinaryBitmap binaryBitmapWithBinarizer:[ZXHybridBinarizer binarizerWithSource:source]];
     
-    NSError *error = nil;
-    
     // There are a number of hints we can give to the reader, including
     // possible formats, allowed lengths, and the string encoding.
     ZXDecodeHints *hints = [ZXDecodeHints hints];
     
     ZXMultiFormatReader *reader = [ZXMultiFormatReader reader];
-    ZXResult *result = [reader decode:bitmap
-                                hints:hints
-                                error:&error];
+    ZXResult *result = [reader decode:bitmap hints:hints error:nil];
     if (result) {
         // The coded result as a string. The raw data can be accessed with
         // result.rawBytes and result.length.
@@ -314,22 +480,24 @@
         ZXBarcodeFormat format = result.barcodeFormat;
         NSString *formatString = [self barcodeFormatToString:format];
         NSString *display = [NSString stringWithFormat:@"Scanned!\n\nFormat: %@\n\nContents:\n%@", formatString, contents];
-        //[self.decodedLabel performSelectorOnMainThread:@selector(setText:) withObject:display waitUntilDone:YES];
-        //APP_LOG(@"%@",display);
-        resultText = result.text;
+        NSLog(@"%@",display);
+        _resultText = result.text;
         // Vibrate
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        /*[MobClick event:@"qrcodeRecogResultEvent"];
-        if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:result.text]] || ![AppDelegate handleURL:result.text withRootViewController:self])
+        BOOL bHandled = FALSE;
+        if(self.resultHandler && [self.resultHandler conformsToProtocol:@protocol(QuickQRCodeScanResultHandler)])
         {
-            TextQRResultViewController* textQRVC = [[TextQRResultViewController alloc] initWithQRText:resultText];
+            bHandled = [self.resultHandler handleResult:_resultText withQRCodeScanController:self];
+        }
+        if(!bHandled)
+        {
+            QuickTextQRResultController * textQRVC = [[QuickTextQRResultController alloc] initWithText:_resultText];
             [self.navigationController pushViewController:textQRVC animated:YES];
-        }*/
-    } else {
-        // Use error to determine why we didn't get a result, such as a barcode
-        // not being found, an invalid checksum, or a format inconsistency.
-        //[[[[iToast makeText:NSLocalizedString(@"unknown qrcode", nil)] setGravity:iToastGravityCenter] setFontSize:ITOAST_FONT_SIZE] show];
-        //APP_LOG(@"unknown qrcode");
+        }
+    }
+    else
+    {
+        [self.view makeToast:NSLocalizedStringFromTableInBundle(@"unknown qrcode", @"Localizable", SDK_BUNDLE, nil) duration:3.0f position:CSToastPositionCenter];
     }
     
     [self dismissViewControllerAnimated:YES completion:NULL];
@@ -341,5 +509,8 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 @end

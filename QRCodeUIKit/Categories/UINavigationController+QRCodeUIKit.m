@@ -77,6 +77,18 @@
     }
 }
 
+-(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
+    
+    if (navigationController.viewControllers.count == 1) {
+        navigationController.interactivePopGestureRecognizer.enabled = NO;
+        navigationController.interactivePopGestureRecognizer.delegate = nil;
+    }
+}
+
 - (void)dealInteractionChanges:(id<UIViewControllerTransitionCoordinatorContext>)context {
     if ([context isCancelled]) {// 自动取消了返回手势
         NSTimeInterval cancelDuration = [context transitionDuration] * (double)[context percentComplete];
