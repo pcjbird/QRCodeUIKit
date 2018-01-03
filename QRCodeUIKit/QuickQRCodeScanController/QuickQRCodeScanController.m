@@ -230,7 +230,7 @@
 
 -(BOOL)supportQABtn
 {
-    return YES;
+    return NO;
 }
 
 -(void)OnQABtnClick:(id)sender
