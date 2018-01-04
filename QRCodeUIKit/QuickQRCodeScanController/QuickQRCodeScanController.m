@@ -171,6 +171,7 @@
     [_btnAlbum setImage:[UIImage imageNamed:@"qrcode_scan_btn_album_normal" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [_btnAlbum setImage:[UIImage imageNamed:@"qrcode_scan_btn_album_highlight" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
     [_btnAlbum addTarget:self action:@selector(QRCodeFromAlbum:) forControlEvents:UIControlEventTouchUpInside];
+    [_bottomView addSubview:_btnAlbum];
     
     self.btnTorch = [[UIButton alloc] init];
     _btnTorch.bounds = CGRectMake(0, 0, width, height);
@@ -178,6 +179,7 @@
     [_btnTorch setImage:[UIImage imageNamed:@"qrcode_scan_btn_opentorch_normal" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
     [_btnTorch setImage:[UIImage imageNamed:@"qrcode_scan_btn_closetorch_normal" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateSelected];
     [_btnTorch addTarget:self action:@selector(OnTorchBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [_bottomView addSubview:_btnTorch];
     
      if(bMyQRBtnSupport)
      {
@@ -187,6 +189,7 @@
          [_btnMyQR setImage:[UIImage imageNamed:@"qrcode_scan_btn_myqrcode_normal" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
          [_btnMyQR setImage:[UIImage imageNamed:@"qrcode_scan_btn_myqrcode_highlight" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
          [_btnMyQR addTarget:self action:@selector(OnMyQRBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+         [_bottomView addSubview:_btnMyQR];
      }
 
      if([self supportQABtn])
@@ -196,10 +199,6 @@
          _btnQA.center = CGPointMake(flexibleWidth*(bMyQRBtnSupport ? 3.5f : 2.5f), CGRectGetHeight(_bottomView.frame)/2);
          [_btnQA setImage:[UIImage imageNamed:@"qrcode_scan_btn_qa_normal" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
          [_btnQA addTarget:self action:@selector(OnQABtnClick:) forControlEvents:UIControlEventTouchUpInside];
-         
-         [_bottomView addSubview:_btnAlbum];
-         [_bottomView addSubview:_btnTorch];
-         [_bottomView addSubview:_btnMyQR];
          [_bottomView addSubview:_btnQA];
      }
    
