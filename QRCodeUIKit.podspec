@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "QRCodeUIKit"
-    s.version          = "1.0.0"
+    s.version          = "1.0.1"
     s.summary          = "一款让扫码变得简单的视图控制器"
     s.description      = <<-DESC
     一款让扫码变得简单的视图控制器
@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
     end
 
     s.subspec 'QuickQRCodeScanController' do |ss|
-        ss.source_files = 'QRCodeUIKit/QuickQRCodeScanController/*.{h,m}', 'QRCodeUIKit/QuickQRCodeScanController/UI', 'QRCodeUIKit/Categories/*.{h,m}', 'QRCodeUIKit/QuickTextQRResultController/*.{h,m}'
+        ss.source_files = 'QRCodeUIKit/QuickQRCodeScanController/*.{h,m}', 'QRCodeUIKit/QuickQRCodeScanController/UI', 'QRCodeUIKit/Categories/*.{h,m}'
         ss.public_header_files = 'QRCodeUIKit/QuickQRCodeScanController/QuickQRCodeScanController.h', 'QRCodeUIKit/QuickQRCodeScanController/QuickQRCodeScanResultHandler.h', 'QRCodeUIKit/QuickQRCodeScanController/UI/QuickQRCodeScanViewStyle.h'
         ss.dependency 'ZXingObjC'
         ss.dependency 'Toast'
