@@ -25,6 +25,14 @@ FOUNDATION_EXPORT const unsigned char QRCodeUIKitVersionString[];
 #import "QuickQRCodeScanController.h"
 #endif
 
+#if __has_include("QuickQRCodeScanViewStyle.h")
+#import "QuickQRCodeScanViewStyle.h"
+#endif
+
+#if __has_include("QuickQRCodeScanResultHandler.h")
+#import "QuickQRCodeScanResultHandler.h"
+#endif
+
 #if __has_include("QuickTextQRResultController.h")
 #import "QuickTextQRResultController.h"
 #endif

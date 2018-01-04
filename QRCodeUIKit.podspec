@@ -15,12 +15,28 @@ Pod::Spec.new do |s|
 #s.screenshot       = ''
 
     s.platform         = :ios, '8.0'
-    s.frameworks       = 'Foundation', 'UIKit'
+    s.frameworks       = 'Foundation', 'UIKit', 'CoreGraphics'
 #s.preserve_paths   = ''
-    s.source_files     = 'QRCodeUIKit/*.{h,m}'
+    s.source_files     = 'QRCodeUIKit/*.{h,m}', 'QRCodeUIKit/Categories/*.{h,m}'
     s.public_header_files = 'QRCodeUIKit/*.{h}'
 
+    s.resource_bundles = {
+    'QRCodeUIKit' => ['QRCodeUIKitResource/*.*'],
+    }
 
     s.pod_target_xcconfig = { 'OTHER_LDFLAGS' => '-lObjC' }
+
+    s.subspec 'QuickQRCodeScanController' do |ss|
+        ss.source_files = 'QuickQRCodeScanController/*.{h,m}', 'QuickQRCodeScanController/UI'
+        ss.public_header_files = 'QuickQRCodeScanController/QuickQRCodeScanController.h', 'QuickQRCodeScanController/QuickQRCodeScanResultHandler.h', 'QuickQRCodeScanController/UI/QuickQRCodeScanViewStyle.h'
+        ss.dependency 'ZXingObjC'
+        ss.dependency 'Toast'
+    end
+
+    s.subspec 'QuickTextQRResultController' do |ss|
+        ss.source_files = 'QuickTextQRResultController/*.{h,m}'
+        ss.public_header_files = 'QuickTextQRResultController/QuickTextQRResultController.h'
+        ss.dependency 'TTTAttributedLabel'
+    end
 
 end
