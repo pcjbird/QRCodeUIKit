@@ -21,6 +21,7 @@
 {
     NSString*      _resultText;
     CGAffineTransform _captureSizeTransform;
+    BOOL           _translucent;
 }
 //返回按钮
 @property (nonatomic, strong) UIBarButtonItem *backItem;
@@ -61,6 +62,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    _translucent = self.navigationController.navigationBar.translucent;
+    if(!_translucent)
+    {
+        self.navigationController.navigationBar.translucent = YES;
+    }
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     self.qrcodeuikit_NavBarBgAlpha = @"0.0";
     [self updateLeftBarButtonItems];
@@ -76,7 +82,10 @@
 {
     [_scanView stopScanAnimation];
     [super viewWillDisappear:animated];
-    
+    if(!_translucent)
+    {
+        self.navigationController.navigationBar.translucent = NO;
+    }
 }
 
 - (void)viewDidLoad {
@@ -87,7 +96,7 @@
     self.view.backgroundColor = [UIColor blackColor];
     self.hidesBottomBarWhenPushed = YES;
     self.edgesForExtendedLayout = UIRectEdgeAll;
-    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.extendedLayoutIncludesOpaqueBars = YES;
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 && [[[UIDevice currentDevice] systemVersion] floatValue] < 11.0)
     {
         self.automaticallyAdjustsScrollViewInsets = YES;
