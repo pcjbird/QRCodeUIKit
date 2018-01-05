@@ -25,7 +25,8 @@
         }
         else
         {
-            UIView *backgroundEffectView = [[barBackgroundView subviews] objectAtIndex:1];// UIVisualEffectView
+            NSArray *subviews = [barBackgroundView subviews];
+            UIView *backgroundEffectView = [subviews objectAtIndex:([subviews count] > 1) ? 1 : 0];// UIVisualEffectView
             if (backgroundEffectView != nil)
             {
                 backgroundEffectView.alpha = alpha;
@@ -36,7 +37,6 @@
     {
         barBackgroundView.alpha = alpha;
     }
-    
     // 对导航栏下面那条线做处理
     self.navigationBar.clipsToBounds = alpha == 0.0;
 }

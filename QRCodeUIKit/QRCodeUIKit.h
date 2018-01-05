@@ -8,6 +8,9 @@
 //  框架名称:QRCodeUIKit
 //  框架功能:一款让扫码变得简单的视图控制器。
 //  修改记录:
+//     pcjbird    2018-01-05  Version:1.0.4 Build:201801050002
+//                            1.修复iOS 9 Crash的问题
+//
 //     pcjbird    2018-01-05  Version:1.0.3 Build:201801050001
 //                            1.修复当UINavigationBar的translucent为No时的显示问题。
 //
