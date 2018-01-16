@@ -218,7 +218,7 @@
 {
     if (!self.capture.hasTorch)
     {
-        [self.view makeToast:NSLocalizedStringFromTableInBundle(@"Your device has no torch.", @"Localizable", SDK_BUNDLE, nil) duration:3.0f position:CSToastPositionCenter];
+        [self.view makeToast:NSLocalizedStringFromTableInBundle(@"Your device has no torch.", @"Localizable", SDK_BUNDLE, nil) duration:3.0f position:CSToastPositionCenter style:[CSToastManager sharedStyle]];
         return;
     }
     
@@ -505,7 +505,7 @@
     }
     else
     {
-        [self.view makeToast:NSLocalizedStringFromTableInBundle(@"unknown qrcode", @"Localizable", SDK_BUNDLE, nil) duration:3.0f position:CSToastPositionCenter];
+        [self.view makeToast:NSLocalizedStringFromTableInBundle(@"unknown qrcode", @"Localizable", SDK_BUNDLE, nil) duration:3.0f position:CSToastPositionCenter style:[CSToastManager sharedStyle]];
     }
     
     [self dismissViewControllerAnimated:YES completion:NULL];

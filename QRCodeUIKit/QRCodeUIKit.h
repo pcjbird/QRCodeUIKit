@@ -8,6 +8,9 @@
 //  框架名称:QRCodeUIKit
 //  框架功能:一款让扫码变得简单的视图控制器。
 //  修改记录:
+//     pcjbird    2018-01-16  Version:1.0.5 Build:201801160001
+//                            1.修改toast样式为共享样式
+//
 //     pcjbird    2018-01-05  Version:1.0.4 Build:201801050002
 //                            1.修复iOS 9 Crash的问题
 //
