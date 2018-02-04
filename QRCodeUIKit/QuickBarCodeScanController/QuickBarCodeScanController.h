@@ -6,7 +6,7 @@
 //  Copyright © 2018年 Zero Status. All rights reserved.
 //
 
-#import <QRCodeUIKit/QRCodeUIKit.h>
+#import "QuickQRCodeScanController.h"
 
 @interface QuickBarCodeScanController : QuickQRCodeScanController
 
