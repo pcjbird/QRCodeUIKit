@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
     s.version          = "1.0.6"
     s.summary          = "一款让扫码变得简单的视图控制器"
     s.description      = <<-DESC
-    一款让扫码变得简单的视图控制器
+    一款让扫码变得简单的视图控制器,支持 二维码/条码 扫描，可无需一行代码快速集成。
     DESC
     s.homepage         = "https://github.com/pcjbird/QRCodeUIKit"
     s.license          = 'MIT'
