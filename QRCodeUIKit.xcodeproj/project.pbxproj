@@ -52,6 +52,8 @@
 		89B3115F1FFCBD91000D07CB /* qrcode_scan_grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B3115D1FFCBD91000D07CB /* qrcode_scan_grid.png */; };
 		89B311601FFCBD91000D07CB /* qrcode_scan_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B3115E1FFCBD91000D07CB /* qrcode_scan_line@2x.png */; };
 		89B311641FFCD918000D07CB /* QuickQRCodeScanResultHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 89B311631FFCD419000D07CB /* QuickQRCodeScanResultHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		89E4BBF12026DA4F00890518 /* QuickBarCodeScanController.h in Headers */ = {isa = PBXBuildFile; fileRef = 89E4BBEF2026DA4F00890518 /* QuickBarCodeScanController.h */; };
+		89E4BBF22026DA4F00890518 /* QuickBarCodeScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E4BBF02026DA4F00890518 /* QuickBarCodeScanController.m */; };
 		ACEC742F4E7A2230B02DF0F2 /* Pods_QRCodeUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EADF8C736C4CB159204EBD9 /* Pods_QRCodeUIKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +98,8 @@
 		89B3115D1FFCBD91000D07CB /* qrcode_scan_grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qrcode_scan_grid.png; sourceTree = "<group>"; };
 		89B3115E1FFCBD91000D07CB /* qrcode_scan_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_scan_line@2x.png"; sourceTree = "<group>"; };
 		89B311631FFCD419000D07CB /* QuickQRCodeScanResultHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickQRCodeScanResultHandler.h; sourceTree = "<group>"; };
+		89E4BBEF2026DA4F00890518 /* QuickBarCodeScanController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickBarCodeScanController.h; sourceTree = "<group>"; };
+		89E4BBF02026DA4F00890518 /* QuickBarCodeScanController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickBarCodeScanController.m; sourceTree = "<group>"; };
 		A032259E5228CA6C8C04E263 /* Pods-QRCodeUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QRCodeUIKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QRCodeUIKit/Pods-QRCodeUIKit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,7 +146,7 @@
 			children = (
 				89B3110C1FFB7EFB000D07CB /* Metadata */,
 				89B310FD1FFB7CD9000D07CB /* QRCodeUIKit */,
-				89B311181FFB826F000D07CB /* QRCodeUIKitResource */,
+				89B311181FFB826F000D07CB /* QRCodeUIKitBundle */,
 				89B310FC1FFB7CD9000D07CB /* Products */,
 				B5E4EEAE6259D45403038DA5 /* Pods */,
 				4930F276B3F9C962ADC3F149 /* Frameworks */,
@@ -164,6 +168,7 @@
 				89B310FE1FFB7CD9000D07CB /* QRCodeUIKit.h */,
 				890479771FFBCC9E00B0DA41 /* Categories */,
 				89B311061FFB7DF0000D07CB /* QuickQRCodeScanController */,
+				89E4BBEE2026DA1100890518 /* QuickBarCodeScanController */,
 				89B311071FFB7E62000D07CB /* QuickTextQRResultController */,
 				89B310FF1FFB7CD9000D07CB /* Info.plist */,
 			);
@@ -200,7 +205,7 @@
 			name = Metadata;
 			sourceTree = "<group>";
 		};
-		89B311181FFB826F000D07CB /* QRCodeUIKitResource */ = {
+		89B311181FFB826F000D07CB /* QRCodeUIKitBundle */ = {
 			isa = PBXGroup;
 			children = (
 				89B3115D1FFCBD91000D07CB /* qrcode_scan_grid.png */,
@@ -217,7 +222,7 @@
 				89B311191FFB826F000D07CB /* Info.plist */,
 				89B311271FFB839F000D07CB /* Localizable.strings */,
 			);
-			path = QRCodeUIKitResource;
+			path = QRCodeUIKitBundle;
 			sourceTree = "<group>";
 		};
 		89B311481FFC9F5E000D07CB /* UI */ = {
@@ -233,6 +238,15 @@
 				89B3115A1FFCA5CD000D07CB /* QuickQRCodeScanGridAnimation.m */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		89E4BBEE2026DA1100890518 /* QuickBarCodeScanController */ = {
+			isa = PBXGroup;
+			children = (
+				89E4BBEF2026DA4F00890518 /* QuickBarCodeScanController.h */,
+				89E4BBF02026DA4F00890518 /* QuickBarCodeScanController.m */,
+			);
+			path = QuickBarCodeScanController;
 			sourceTree = "<group>";
 		};
 		B5E4EEAE6259D45403038DA5 /* Pods */ = {
@@ -260,6 +274,7 @@
 				89B311531FFCA58B000D07CB /* QuickQRCodeScanLineAnimation.h in Headers */,
 				89B3115B1FFCA5CD000D07CB /* QuickQRCodeScanGridAnimation.h in Headers */,
 				89B311311FFB8B60000D07CB /* QuickQRCodeScanController.h in Headers */,
+				89E4BBF12026DA4F00890518 /* QuickBarCodeScanController.h in Headers */,
 				89B3110A1FFB7EF4000D07CB /* QuickTextQRResultController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,9 +302,9 @@
 			productReference = 89B310FB1FFB7CD9000D07CB /* QRCodeUIKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		89B311161FFB826F000D07CB /* QRCodeUIKitResource */ = {
+		89B311161FFB826F000D07CB /* QRCodeUIKitBundle */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 89B3111A1FFB826F000D07CB /* Build configuration list for PBXNativeTarget "QRCodeUIKitResource" */;
+			buildConfigurationList = 89B3111A1FFB826F000D07CB /* Build configuration list for PBXNativeTarget "QRCodeUIKitBundle" */;
 			buildPhases = (
 				89B311131FFB826F000D07CB /* Sources */,
 				89B311141FFB826F000D07CB /* Frameworks */,
@@ -299,7 +314,7 @@
 			);
 			dependencies = (
 			);
-			name = QRCodeUIKitResource;
+			name = QRCodeUIKitBundle;
 			productName = QRCodeUIKitResource;
 			productReference = 89B311171FFB826F000D07CB /* QRCodeUIKit.bundle */;
 			productType = "com.apple.product-type.bundle";
@@ -341,7 +356,7 @@
 			projectRoot = "";
 			targets = (
 				89B310FA1FFB7CD9000D07CB /* QRCodeUIKit */,
-				89B311161FFB826F000D07CB /* QRCodeUIKitResource */,
+				89B311161FFB826F000D07CB /* QRCodeUIKitBundle */,
 				89B3111D1FFB82F3000D07CB /* QRCodeUIKit-Universal */,
 			);
 		};
@@ -419,7 +434,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "FMK_NAME=${PRODUCT_NAME}\n\n# Working dir will be deleted after the framework creation.\n\nWRK_DIR=build\n\n#Resource bundle\nBUNDLE_TARGET_NAME=${FMK_NAME}Resource\nBUNDLEDEVICE_DIR=${WRK_DIR}/Release-iphoneos/${FMK_NAME}.bundle\nINSTALL_BUNDLE_DIR=${SRCROOT}/products/${FMK_NAME}.bundle\n\n#build resource\nxcodebuild -configuration \"Release\" -target \"${BUNDLE_TARGET_NAME}\" -sdk iphoneos clean build\n\nditto \"${BUNDLEDEVICE_DIR}\" \"${INSTALL_BUNDLE_DIR}\"\n\n#rm -f \"${INSTALL_BUNDLE_DIR}\"/info.plist\nrm -f \"${INSTALL_BUNDLE_DIR}/${FMK_NAME}\"";
+			shellScript = "FMK_NAME=${PRODUCT_NAME}\n\n# Working dir will be deleted after the framework creation.\n\nWRK_DIR=build\n\n#Resource bundle\nBUNDLE_TARGET_NAME=${FMK_NAME}Bundle\nBUNDLEDEVICE_DIR=${WRK_DIR}/Release-iphoneos/${FMK_NAME}.bundle\nINSTALL_BUNDLE_DIR=${SRCROOT}/products/${FMK_NAME}.bundle\n\n#build resource\nxcodebuild -configuration \"Release\" -target \"${BUNDLE_TARGET_NAME}\" -sdk iphoneos clean build\n\nditto \"${BUNDLEDEVICE_DIR}\" \"${INSTALL_BUNDLE_DIR}\"\n\n#rm -f \"${INSTALL_BUNDLE_DIR}\"/info.plist\nrm -f \"${INSTALL_BUNDLE_DIR}/${FMK_NAME}\"";
 		};
 		9A0D161A1ACC01DF49F52ED6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -451,6 +466,7 @@
 				89B311541FFCA58B000D07CB /* QuickQRCodeScanLineAnimation.m in Sources */,
 				89B311501FFC9FB5000D07CB /* QuickQRCodeScanViewStyle.m in Sources */,
 				89B3115C1FFCA5CD000D07CB /* QuickQRCodeScanGridAnimation.m in Sources */,
+				89E4BBF22026DA4F00890518 /* QuickBarCodeScanController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,7 +687,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = NO;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = QRCodeUIKitResource/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/QRCodeUIKitBundle/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lessney.QRCodeUIKitResource;
@@ -689,7 +705,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = NO;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = QRCodeUIKitResource/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/QRCodeUIKitBundle/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lessney.QRCodeUIKitResource;
@@ -737,7 +753,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		89B3111A1FFB826F000D07CB /* Build configuration list for PBXNativeTarget "QRCodeUIKitResource" */ = {
+		89B3111A1FFB826F000D07CB /* Build configuration list for PBXNativeTarget "QRCodeUIKitBundle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				89B3111B1FFB826F000D07CB /* Debug */,

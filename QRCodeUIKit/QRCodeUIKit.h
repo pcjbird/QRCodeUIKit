@@ -8,6 +8,11 @@
 //  框架名称:QRCodeUIKit
 //  框架功能:一款让扫码变得简单的视图控制器。
 //  修改记录:
+//     pcjbird    2018-02-04  Version:1.0.6 Build:201802040001
+//                            1.支持放弃扫描结果并继续扫描
+//                            2.支持自定义未识别的扫描结果提示文本
+//                            3.新增单独条码扫描(QuickBarCodeScanController)支持
+//
 //     pcjbird    2018-01-16  Version:1.0.5 Build:201801160001
 //                            1.修改toast样式为共享样式
 //
@@ -46,6 +51,10 @@ FOUNDATION_EXPORT const unsigned char QRCodeUIKitVersionString[];
 
 #if __has_include("QuickQRCodeScanResultHandler.h")
 #import "QuickQRCodeScanResultHandler.h"
+#endif
+
+#if __has_include("QuickBarCodeScanController.h")
+#import "QuickBarCodeScanController.h"
 #endif
 
 #if __has_include("QuickTextQRResultController.h")

@@ -7,7 +7,9 @@
 */
 "Scan" = "扫一扫";
 "ScanTip" = "请将二维码放入框内";
+"BarCodeScanTip" = "请将条码码放入框内";
 "Your device has no torch." = "您的设备不支持闪光灯。";
 "unknown qrcode"="无法识别的二维码";
+"unknown barcode"="无法识别的条码";
 "Scan Result" = "扫描结果";
 "PressCopyTip" = "*长按虚线框，复制扫描结果。";

@@ -7,7 +7,9 @@
 */
 "Scan" = "Scan";
 "ScanTip" = "Put QRCode in ScanRect";
+"BarCodeScanTip" = "Put BarCode in ScanRect";
 "Your device has no torch." = "Your device has no torch.";
 "unknown qrcode"="Unknown QRCode";
+"unknown barcode"="Unknown BarCode";
 "Scan Result" = "Scan Result";
 "PressCopyTip" = "*Long press dotted box, copy scan results to Pasteboard.";

@@ -147,6 +147,19 @@
     return NSLocalizedStringFromTableInBundle(@"ScanTip", @"Localizable", SDK_BUNDLE, nil);
 }
 
+-(NSString *) unknownCodeTipText
+{
+    return NSLocalizedStringFromTableInBundle(@"unknown qrcode", @"Localizable", SDK_BUNDLE, nil);
+}
+
+-(BOOL) shouldGiveUpAndContinueWithFormat:(ZXBarcodeFormat)format detectedText:(NSString *)detectedText
+{
+    if(![detectedText isKindOfClass:[NSString class]] || [detectedText length] ==0)
+    {
+        return YES;
+    }
+    return NO;
+}
 
 -(void)addBottomView
 {
@@ -429,8 +442,9 @@
 #pragma mark - ZXCaptureDelegate Methods
 
 - (void)captureResult:(ZXCapture *)capture result:(ZXResult *)result {
-    if (!result) return;
+    if (![result isKindOfClass:[ZXResult class]]) return;
     if (_resultText) return;
+    if([self shouldGiveUpAndContinueWithFormat:result.barcodeFormat detectedText:result.text]) return;
     // We got a result. Display information about the result onscreen.
     NSString *formatString = [self barcodeFormatToString:result.barcodeFormat];
     NSString *display = [NSString stringWithFormat:@"Scanned!\n\nFormat: %@\n\nContents:\n%@", formatString, result.text];
@@ -479,7 +493,8 @@
     
     ZXMultiFormatReader *reader = [ZXMultiFormatReader reader];
     ZXResult *result = [reader decode:bitmap hints:hints error:nil];
-    if (result) {
+    if ([result isKindOfClass:[ZXResult class]] && ![self shouldGiveUpAndContinueWithFormat:result.barcodeFormat detectedText:result.text])
+    {
         // The coded result as a string. The raw data can be accessed with
         // result.rawBytes and result.length.
         NSString *contents = result.text;
@@ -505,7 +520,7 @@
     }
     else
     {
-        [self.view makeToast:NSLocalizedStringFromTableInBundle(@"unknown qrcode", @"Localizable", SDK_BUNDLE, nil) duration:3.0f position:CSToastPositionCenter style:[CSToastManager sharedStyle]];
+        [self.view makeToast:[self unknownCodeTipText] duration:3.0f position:CSToastPositionCenter style:[CSToastManager sharedStyle]];
     }
     
     [self dismissViewControllerAnimated:YES completion:NULL];

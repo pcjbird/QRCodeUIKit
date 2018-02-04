@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ZXingObjC/ZXBarcodeFormat.h>
 #import "QuickQRCodeScanViewStyle.h"
 #import "QuickQRCodeScanResultHandler.h"
 
@@ -24,8 +25,23 @@
 
 /*
  * @brief 扫描提示
+ * @return 提示文本
  */
 -(NSString *_Nonnull) scanTipText;
+
+/*
+ * @brief 无法识别提示
+ * @return 提示文本
+ */
+-(NSString *_Nonnull) unknownCodeTipText;
+
+/*
+ * @brief 是否应该放弃并继续扫描
+ * @param format 格式
+ * @param detectedText 探测到的文本
+ * @return 是否应该放弃并继续扫描
+ */
+-(BOOL) shouldGiveUpAndContinueWithFormat:(ZXBarcodeFormat)format detectedText:(NSString *_Nullable)detectedText;
 
 /*
  * @brief 我的二维码，为nil或空字符串时将不显示该按钮
