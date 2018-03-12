@@ -8,6 +8,9 @@
 //  框架名称:QRCodeUIKit
 //  框架功能:一款让扫码变得简单的视图控制器。
 //  修改记录:
+//     pcjbird    2018-03-12  Version:1.0.7 Build:201803120001
+//                            1.修复bundle plist "Unexpected CFBundleExecutable Key"的问题
+//
 //     pcjbird    2018-02-04  Version:1.0.6 Build:201802040001
 //                            1.支持放弃扫描结果并继续扫描
 //                            2.支持自定义未识别的扫描结果提示文本
