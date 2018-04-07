@@ -45,17 +45,26 @@
     return NSLocalizedStringFromTableInBundle(@"unknown barcode", @"Localizable", SDK_BUNDLE, nil);
 }
 
--(BOOL) shouldGiveUpAndContinueWithFormat:(ZXBarcodeFormat)format detectedText:(NSString *)detectedText
+-(BOOL) shouldGiveUpAndContinueWithFormat:(AVMetadataObjectType)format detectedText:(NSString *)detectedText
 {
     if([super shouldGiveUpAndContinueWithFormat:format detectedText:detectedText])
     {
         return YES;
     }
-    if(format == kBarcodeFormatAztec || format == kBarcodeFormatMaxiCode || format == kBarcodeFormatQRCode)
-    {
-        return YES;
-    }
     return NO;
+}
+
+-(NSArray<AVMetadataObjectType> *)supportedAVMetadataObjectTypes
+{
+    return @[AVMetadataObjectTypeCode39Code,
+             AVMetadataObjectTypeCode93Code,
+             AVMetadataObjectTypeCode128Code,
+             AVMetadataObjectTypeEAN8Code,
+             AVMetadataObjectTypeEAN13Code,
+             AVMetadataObjectTypeITF14Code,
+             AVMetadataObjectTypePDF417Code,
+             AVMetadataObjectTypeUPCECode
+             ];
 }
 
 -(NSString *) myQRText

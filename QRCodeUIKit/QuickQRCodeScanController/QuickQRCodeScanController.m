@@ -9,7 +9,6 @@
 #import "QuickQRCodeScanController.h"
 #import "UIViewController+QRCodeUIKit.h"
 #import "UINavigationController+QRCodeUIKit.h"
-#import <ZXingObjC/ZXingObjC.h>
 #import <Toast/Toast.h>
 #import "QuickQRCodeScanView.h"
 #import "QuickTextQRResultController.h"
@@ -17,7 +16,7 @@
 
 #define SDK_BUNDLE [NSBundle bundleWithPath:[[NSBundle bundleForClass:[QuickQRCodeScanController class]] pathForResource:@"QRCodeUIKit" ofType:@"bundle"]]
 
-@interface QuickQRCodeScanController ()<ZXCaptureDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface QuickQRCodeScanController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,AVCaptureMetadataOutputObjectsDelegate>
 {
     NSString*      _resultText;
     CGAffineTransform _captureSizeTransform;
@@ -38,7 +37,7 @@
 //可以扫什么
 @property (nonatomic, strong) UIButton *btnQA;
 
-@property (nonatomic, strong) ZXCapture *capture;
+@property (nonatomic, strong) AVCaptureSession *captureSession;
 
 @end
 
@@ -74,12 +73,14 @@
     _resultText = nil;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*0.3f), dispatch_get_main_queue(), ^{
         [_scanView startScanAnimation];
+        if(_captureSession && !_captureSession.running) [_captureSession startRunning];
     });
     
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    if(_captureSession && _captureSession.running) [_captureSession stopRunning];
     [_scanView stopScanAnimation];
     [super viewWillDisappear:animated];
     if(!_translucent)
@@ -101,19 +102,43 @@
     {
         self.automaticallyAdjustsScrollViewInsets = YES;
     }
-    
-    self.capture = [[ZXCapture alloc] init];
-    self.capture.camera = self.capture.back;
-    self.capture.focusMode = AVCaptureFocusModeContinuousAutoFocus;
-    self.capture.rotation = 90.0f;
-    
-    self.capture.layer.frame = self.view.bounds;
-    [self.view.layer addSublayer:self.capture.layer];
-    self.capture.delegate = self;
-    [self applyOrientation];
     [self addScanView];
     [self addTipView];
     [self addBottomView];
+    [self initCaptureSession];
+}
+
+-(BOOL) initCaptureSession
+{
+    //获取摄像设备
+    AVCaptureDevice * device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    //创建输入流
+    AVCaptureDeviceInput * input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
+    if (!input) return FALSE;
+    //创建输出流
+    AVCaptureMetadataOutput * output = [[AVCaptureMetadataOutput alloc]init];
+    //设置代理 在主线程里刷新
+    [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    //设置有效扫描区域
+    CGRect scanAreaRect = _scanView.scanAreaRect;
+    output.rectOfInterest = scanAreaRect;
+    //初始化链接对象
+    _captureSession = [[AVCaptureSession alloc] init];
+    //高质量采集率
+    [_captureSession setSessionPreset:AVCaptureSessionPresetHigh];
+    
+    [_captureSession addInput:input];
+    [_captureSession addOutput:output];
+    //设置扫码支持的编码格式(如下设置条形码和二维码兼容)
+    output.metadataObjectTypes= [self supportedAVMetadataObjectTypes];
+    
+    AVCaptureVideoPreviewLayer * layer = [AVCaptureVideoPreviewLayer layerWithSession:_captureSession];
+    layer.videoGravity=AVLayerVideoGravityResizeAspectFill;
+    layer.frame=self.view.layer.bounds;
+    [self.view.layer insertSublayer:layer atIndex:0];
+    //开始捕获
+    [_captureSession startRunning];
+    return TRUE;
 }
 
 -(void) addScanView
@@ -152,7 +177,7 @@
     return NSLocalizedStringFromTableInBundle(@"unknown qrcode", @"Localizable", SDK_BUNDLE, nil);
 }
 
--(BOOL) shouldGiveUpAndContinueWithFormat:(ZXBarcodeFormat)format detectedText:(NSString *)detectedText
+-(BOOL) shouldGiveUpAndContinueWithFormat:(AVMetadataObjectType)format detectedText:(NSString *)detectedText
 {
     if(![detectedText isKindOfClass:[NSString class]] || [detectedText length] ==0)
     {
@@ -229,14 +254,19 @@
                                    
 -(void)OnTorchBtnClick:(id)sender
 {
-    if (!self.capture.hasTorch)
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if (!device || !device.hasTorch || !device.hasFlash)
     {
         [self.view makeToast:NSLocalizedStringFromTableInBundle(@"Your device has no torch.", @"Localizable", SDK_BUNDLE, nil) duration:3.0f position:CSToastPositionCenter style:[CSToastManager sharedStyle]];
         return;
     }
-    
-    self.capture.torch = !self.capture.torch;
-    ((UIButton*)sender).selected = self.capture.torch;
+    [device lockForConfiguration:nil];
+    BOOL isOn = (device.torchMode == AVCaptureTorchModeOn) || (device.flashMode == AVCaptureFlashModeOn);
+    [device setTorchMode:isOn ? AVCaptureTorchModeOff : AVCaptureTorchModeOn];
+    [device setFlashMode:isOn ? AVCaptureFlashModeOff : AVCaptureFlashModeOn];
+    isOn = (device.torchMode == AVCaptureTorchModeOn) || (device.flashMode == AVCaptureFlashModeOn);
+    ((UIButton*)sender).selected = isOn;
+    [device unlockForConfiguration];
 }
 
 -(NSString *)myQRText
@@ -257,6 +287,11 @@
 -(void)OnQABtnClick:(id)sender
 {
     
+}
+
+-(BOOL)shouldQRCodeFromAlbumWithEdittedImage
+{
+    return YES;
 }
 
 #pragma mark - 更新标题
@@ -313,157 +348,53 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)applyOrientation {
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-    float scanRectRotation;
-    float captureRotation;
-    
-    switch (orientation) {
-        case UIInterfaceOrientationPortrait:
-            captureRotation = 0;
-            scanRectRotation = 90;
-            break;
-        case UIInterfaceOrientationLandscapeLeft:
-            captureRotation = 90;
-            scanRectRotation = 180;
-            break;
-        case UIInterfaceOrientationLandscapeRight:
-            captureRotation = 270;
-            scanRectRotation = 0;
-            break;
-        case UIInterfaceOrientationPortraitUpsideDown:
-            captureRotation = 180;
-            scanRectRotation = 270;
-            break;
-        default:
-            captureRotation = 0;
-            scanRectRotation = 90;
-            break;
-    }
-    [self applyRectOfInterest:orientation];
-    CGAffineTransform transform = CGAffineTransformMakeRotation((CGFloat) (captureRotation / 180 * M_PI));
-    [self.capture setTransform:transform];
-    [self.capture setRotation:scanRectRotation];
-    self.capture.layer.frame = self.view.frame;
-}
-
-- (void)applyRectOfInterest:(UIInterfaceOrientation)orientation {
-    CGFloat scaleVideo, scaleVideoX, scaleVideoY;
-    CGFloat videoSizeX, videoSizeY;
-    CGRect scanAreaRect = _scanView.scanAreaRect;
-    CGRect transformedVideoRect = scanAreaRect;
-    if([self.capture.sessionPreset isEqualToString:AVCaptureSessionPreset1920x1080]) {
-        videoSizeX = 1080;
-        videoSizeY = 1920;
-    } else {
-        videoSizeX = 720;
-        videoSizeY = 1280;
-    }
-    if(UIInterfaceOrientationIsPortrait(orientation)) {
-        scaleVideoX = self.view.frame.size.width / videoSizeX;
-        scaleVideoY = self.view.frame.size.height / videoSizeY;
-        scaleVideo = MAX(scaleVideoX, scaleVideoY);
-        if(scaleVideoX > scaleVideoY) {
-            transformedVideoRect.origin.y += (scaleVideo * videoSizeY - self.view.frame.size.height) / 2;
-        } else {
-            transformedVideoRect.origin.x += (scaleVideo * videoSizeX - self.view.frame.size.width) / 2;
-        }
-    } else {
-        scaleVideoX = self.view.frame.size.width / videoSizeY;
-        scaleVideoY = self.view.frame.size.height / videoSizeX;
-        scaleVideo = MAX(scaleVideoX, scaleVideoY);
-        if(scaleVideoX > scaleVideoY) {
-            transformedVideoRect.origin.y += (scaleVideo * videoSizeX - self.view.frame.size.height) / 2;
-        } else {
-            transformedVideoRect.origin.x += (scaleVideo * videoSizeY - self.view.frame.size.width) / 2;
-        }
-    }
-    _captureSizeTransform = CGAffineTransformMakeScale(1/scaleVideo, 1/scaleVideo);
-    self.capture.scanRect = CGRectApplyAffineTransform(transformedVideoRect, _captureSizeTransform);
-}
 
 #pragma mark - Private Methods
 
-- (NSString *)barcodeFormatToString:(ZXBarcodeFormat)format {
-    switch (format) {
-        case kBarcodeFormatAztec:
-            return @"Aztec";
-            
-        case kBarcodeFormatCodabar:
-            return @"CODABAR";
-            
-        case kBarcodeFormatCode39:
-            return @"Code 39";
-            
-        case kBarcodeFormatCode93:
-            return @"Code 93";
-            
-        case kBarcodeFormatCode128:
-            return @"Code 128";
-            
-        case kBarcodeFormatDataMatrix:
-            return @"Data Matrix";
-            
-        case kBarcodeFormatEan8:
-            return @"EAN-8";
-            
-        case kBarcodeFormatEan13:
-            return @"EAN-13";
-            
-        case kBarcodeFormatITF:
-            return @"ITF";
-            
-        case kBarcodeFormatPDF417:
-            return @"PDF417";
-            
-        case kBarcodeFormatQRCode:
-            return @"QR Code";
-            
-        case kBarcodeFormatRSS14:
-            return @"RSS 14";
-            
-        case kBarcodeFormatRSSExpanded:
-            return @"RSS Expanded";
-            
-        case kBarcodeFormatUPCA:
-            return @"UPCA";
-            
-        case kBarcodeFormatUPCE:
-            return @"UPCE";
-            
-        case kBarcodeFormatUPCEANExtension:
-            return @"UPC/EAN extension";
-            
-        default:
-            return @"Unknown";
+-(NSArray<AVMetadataObjectType> *) supportedAVMetadataObjectTypes
+{
+    return @[AVMetadataObjectTypeAztecCode,
+             AVMetadataObjectTypeCode39Code,
+             AVMetadataObjectTypeCode93Code,
+             AVMetadataObjectTypeCode128Code,
+             AVMetadataObjectTypeDataMatrixCode,
+             AVMetadataObjectTypeEAN8Code,
+             AVMetadataObjectTypeEAN13Code,
+             AVMetadataObjectTypeITF14Code,
+             AVMetadataObjectTypePDF417Code,
+             AVMetadataObjectTypeQRCode,
+             AVMetadataObjectTypeUPCECode
+             ];
+}
+
+#pragma mark - AVCaptureMetadataOutputObjectsDelegate
+-(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection{
+    if (metadataObjects.count > 0)
+    {
+        if (_resultText) return;
+
+        AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects firstObject];
+        if([self shouldGiveUpAndContinueWithFormat:metadataObject.type detectedText:metadataObject.stringValue]) return;
+        NSString *formatString = metadataObject.type;
+        NSString *display = [NSString stringWithFormat:@"已扫描到对象!\n\n格式: %@\n\n内容:\n%@", formatString, metadataObject.stringValue];
+        NSLog(@"%@",display);
+        _resultText = metadataObject.stringValue;
+        // Vibrate
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        BOOL bHandled = FALSE;
+        if(self.resultHandler && [self.resultHandler conformsToProtocol:@protocol(QuickQRCodeScanResultHandler)])
+        {
+            bHandled = [self.resultHandler handleResult:_resultText withQRCodeScanController:self];
+        }
+        if(!bHandled)
+        {
+            QuickTextQRResultController * textQRVC = [[QuickTextQRResultController alloc] initWithText:_resultText];
+            [self.navigationController pushViewController:textQRVC animated:YES];
+        }
     }
 }
 
-#pragma mark - ZXCaptureDelegate Methods
-
-- (void)captureResult:(ZXCapture *)capture result:(ZXResult *)result {
-    if (![result isKindOfClass:[ZXResult class]]) return;
-    if (_resultText) return;
-    if([self shouldGiveUpAndContinueWithFormat:result.barcodeFormat detectedText:result.text]) return;
-    // We got a result. Display information about the result onscreen.
-    NSString *formatString = [self barcodeFormatToString:result.barcodeFormat];
-    NSString *display = [NSString stringWithFormat:@"Scanned!\n\nFormat: %@\n\nContents:\n%@", formatString, result.text];
-    NSLog(@"%@",display);
-    _resultText = result.text;
-    // Vibrate
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    BOOL bHandled = FALSE;
-    if(self.resultHandler && [self.resultHandler conformsToProtocol:@protocol(QuickQRCodeScanResultHandler)])
-    {
-        bHandled = [self.resultHandler handleResult:_resultText withQRCodeScanController:self];
-    }
-    if(!bHandled)
-    {
-        QuickTextQRResultController * textQRVC = [[QuickTextQRResultController alloc] initWithText:_resultText];
-        [self.navigationController pushViewController:textQRVC animated:YES];
-    }
-}
-
+#pragma mark - QRCodeFromAlbum Button Click
 -(void)QRCodeFromAlbum:(id)sender
 {
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
@@ -480,31 +411,37 @@
 {
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     if (_resultText) return;
-    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    UIImage *image = nil;
+    BOOL bShouldEdittedImage = [self shouldQRCodeFromAlbumWithEdittedImage];
     
-    CGImageRef imageToDecode = image.CGImage;  // Given a CGImage in which we are looking for barcodes
-    
-    ZXLuminanceSource *source = [[ZXCGImageLuminanceSource alloc] initWithCGImage:imageToDecode];
-    ZXBinaryBitmap *bitmap = [ZXBinaryBitmap binaryBitmapWithBinarizer:[ZXHybridBinarizer binarizerWithSource:source]];
-    
-    // There are a number of hints we can give to the reader, including
-    // possible formats, allowed lengths, and the string encoding.
-    ZXDecodeHints *hints = [ZXDecodeHints hints];
-    
-    ZXMultiFormatReader *reader = [ZXMultiFormatReader reader];
-    ZXResult *result = [reader decode:bitmap hints:hints error:nil];
-    if ([result isKindOfClass:[ZXResult class]] && ![self shouldGiveUpAndContinueWithFormat:result.barcodeFormat detectedText:result.text])
+    if(bShouldEdittedImage)
     {
-        // The coded result as a string. The raw data can be accessed with
-        // result.rawBytes and result.length.
-        NSString *contents = result.text;
-        
-        // The barcode format, such as a QR code or UPC-A
-        ZXBarcodeFormat format = result.barcodeFormat;
-        NSString *formatString = [self barcodeFormatToString:format];
-        NSString *display = [NSString stringWithFormat:@"Scanned!\n\nFormat: %@\n\nContents:\n%@", formatString, contents];
+        image = [info valueForKey:UIImagePickerControllerEditedImage];
+    }
+    else
+    {
+        image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    }
+    if(![image isKindOfClass:[UIImage class]])
+    {
+        [self.view makeToast:[self unknownCodeTipText] duration:3.0f position:CSToastPositionCenter style:[CSToastManager sharedStyle]];
+        [self dismissViewControllerAnimated:YES completion:NULL];
+        return;
+    }
+    //初始化一个监测器
+    CIDetector*detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{ CIDetectorAccuracy : CIDetectorAccuracyHigh }];
+    //监测到的结果数组
+    NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
+    
+    if(features.count >=1 )
+    {
+        [self dismissViewControllerAnimated:YES completion:NULL];
+        /**结果对象 */
+        CIQRCodeFeature *feature = [features firstObject];
+        NSString *formatString = CIDetectorTypeQRCode;
+        NSString *display = [NSString stringWithFormat:@"已扫描到对象!\n\n格式: %@\n\n内容:\n%@", formatString, feature.messageString];
         NSLog(@"%@",display);
-        _resultText = result.text;
+        _resultText = feature.messageString;
         // Vibrate
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         BOOL bHandled = FALSE;
@@ -517,13 +454,14 @@
             QuickTextQRResultController * textQRVC = [[QuickTextQRResultController alloc] initWithText:_resultText];
             [self.navigationController pushViewController:textQRVC animated:YES];
         }
+        
     }
     else
     {
         [self.view makeToast:[self unknownCodeTipText] duration:3.0f position:CSToastPositionCenter style:[CSToastManager sharedStyle]];
+        [self dismissViewControllerAnimated:YES completion:NULL];
+        return;
     }
-    
-    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 

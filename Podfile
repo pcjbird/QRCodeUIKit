@@ -9,7 +9,6 @@ target 'QRCodeUIKit' do
   use_frameworks!
 
   # Pods for QRCodeUIKit
-  pod 'ZXingObjC'
   pod 'Toast'
   pod 'TTTAttributedLabel'
 end

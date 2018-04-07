@@ -54,6 +54,7 @@
 		89B311641FFCD918000D07CB /* QuickQRCodeScanResultHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 89B311631FFCD419000D07CB /* QuickQRCodeScanResultHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		89E4BBF12026DA4F00890518 /* QuickBarCodeScanController.h in Headers */ = {isa = PBXBuildFile; fileRef = 89E4BBEF2026DA4F00890518 /* QuickBarCodeScanController.h */; };
 		89E4BBF22026DA4F00890518 /* QuickBarCodeScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E4BBF02026DA4F00890518 /* QuickBarCodeScanController.m */; };
+		89FD55D42078FB09004F28F3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FD55D32078FB09004F28F3 /* AVFoundation.framework */; };
 		ACEC742F4E7A2230B02DF0F2 /* Pods_QRCodeUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EADF8C736C4CB159204EBD9 /* Pods_QRCodeUIKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +101,7 @@
 		89B311631FFCD419000D07CB /* QuickQRCodeScanResultHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickQRCodeScanResultHandler.h; sourceTree = "<group>"; };
 		89E4BBEF2026DA4F00890518 /* QuickBarCodeScanController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickBarCodeScanController.h; sourceTree = "<group>"; };
 		89E4BBF02026DA4F00890518 /* QuickBarCodeScanController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickBarCodeScanController.m; sourceTree = "<group>"; };
+		89FD55D32078FB09004F28F3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A032259E5228CA6C8C04E263 /* Pods-QRCodeUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QRCodeUIKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QRCodeUIKit/Pods-QRCodeUIKit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89FD55D42078FB09004F28F3 /* AVFoundation.framework in Frameworks */,
 				ACEC742F4E7A2230B02DF0F2 /* Pods_QRCodeUIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,6 +128,7 @@
 		4930F276B3F9C962ADC3F149 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89FD55D32078FB09004F28F3 /* AVFoundation.framework */,
 				4EADF8C736C4CB159204EBD9 /* Pods_QRCodeUIKit.framework */,
 			);
 			name = Frameworks;
@@ -291,7 +295,6 @@
 				89B310F71FFB7CD9000D07CB /* Frameworks */,
 				89B310F81FFB7CD9000D07CB /* Headers */,
 				89B310F91FFB7CD9000D07CB /* Resources */,
-				9A0D161A1ACC01DF49F52ED6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -435,21 +438,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "FMK_NAME=${PRODUCT_NAME}\n\n# Working dir will be deleted after the framework creation.\n\nWRK_DIR=build\n\n#Resource bundle\nBUNDLE_TARGET_NAME=${FMK_NAME}Bundle\nBUNDLEDEVICE_DIR=${WRK_DIR}/Release-iphoneos/${FMK_NAME}.bundle\nINSTALL_BUNDLE_DIR=${SRCROOT}/products/${FMK_NAME}.bundle\n\n#build resource\nxcodebuild -configuration \"Release\" -target \"${BUNDLE_TARGET_NAME}\" -sdk iphoneos clean build\n\nditto \"${BUNDLEDEVICE_DIR}\" \"${INSTALL_BUNDLE_DIR}\"\n\n#rm -f \"${INSTALL_BUNDLE_DIR}\"/info.plist\nrm -f \"${INSTALL_BUNDLE_DIR}/${FMK_NAME}\"";
-		};
-		9A0D161A1ACC01DF49F52ED6 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QRCodeUIKit/Pods-QRCodeUIKit-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 

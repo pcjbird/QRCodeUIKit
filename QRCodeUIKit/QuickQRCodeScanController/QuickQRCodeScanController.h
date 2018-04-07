@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ZXingObjC/ZXBarcodeFormat.h>
+#import <AVFoundation/AVFoundation.h>
 #import "QuickQRCodeScanViewStyle.h"
 #import "QuickQRCodeScanResultHandler.h"
 
@@ -41,7 +41,13 @@
  * @param detectedText 探测到的文本
  * @return 是否应该放弃并继续扫描
  */
--(BOOL) shouldGiveUpAndContinueWithFormat:(ZXBarcodeFormat)format detectedText:(NSString *_Nullable)detectedText;
+-(BOOL) shouldGiveUpAndContinueWithFormat:(AVMetadataObjectType)format detectedText:(NSString *_Nullable)detectedText;
+
+/*
+ * @brief 支持的扫码支持的编码格式
+ * @return 扫码支持的编码格式数组
+ */
+-(NSArray<AVMetadataObjectType> *) supportedAVMetadataObjectTypes;
 
 /*
  * @brief 我的二维码，为nil或空字符串时将不显示该按钮
@@ -62,5 +68,10 @@
  * @brief "可以扫什么"按钮点击处理
  */
 -(void)OnQABtnClick:(id _Nonnull )sender;
+
+/*
+ * @brief 当从相册识别二维码时是否应该打开相册的编辑属性
+ */
+-(BOOL)shouldQRCodeFromAlbumWithEdittedImage;
 
 @end
