@@ -55,6 +55,11 @@
 		89E4BBF12026DA4F00890518 /* QuickBarCodeScanController.h in Headers */ = {isa = PBXBuildFile; fileRef = 89E4BBEF2026DA4F00890518 /* QuickBarCodeScanController.h */; };
 		89E4BBF22026DA4F00890518 /* QuickBarCodeScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E4BBF02026DA4F00890518 /* QuickBarCodeScanController.m */; };
 		89FD55D42078FB09004F28F3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FD55D32078FB09004F28F3 /* AVFoundation.framework */; };
+		89FD55D920791C40004F28F3 /* QuickQRCodeGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 89FD55D720791C40004F28F3 /* QuickQRCodeGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		89FD55DA20791C40004F28F3 /* QuickQRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 89FD55D820791C40004F28F3 /* QuickQRCodeGenerator.m */; };
+		89FD55DD20791C56004F28F3 /* QuickBarCodeGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 89FD55DB20791C56004F28F3 /* QuickBarCodeGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		89FD55DE20791C56004F28F3 /* QuickBarCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 89FD55DC20791C56004F28F3 /* QuickBarCodeGenerator.m */; };
+		89FD55E0207925FD004F28F3 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FD55DF207925FD004F28F3 /* CoreImage.framework */; };
 		ACEC742F4E7A2230B02DF0F2 /* Pods_QRCodeUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EADF8C736C4CB159204EBD9 /* Pods_QRCodeUIKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +107,11 @@
 		89E4BBEF2026DA4F00890518 /* QuickBarCodeScanController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickBarCodeScanController.h; sourceTree = "<group>"; };
 		89E4BBF02026DA4F00890518 /* QuickBarCodeScanController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickBarCodeScanController.m; sourceTree = "<group>"; };
 		89FD55D32078FB09004F28F3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		89FD55D720791C40004F28F3 /* QuickQRCodeGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickQRCodeGenerator.h; sourceTree = "<group>"; };
+		89FD55D820791C40004F28F3 /* QuickQRCodeGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickQRCodeGenerator.m; sourceTree = "<group>"; };
+		89FD55DB20791C56004F28F3 /* QuickBarCodeGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickBarCodeGenerator.h; sourceTree = "<group>"; };
+		89FD55DC20791C56004F28F3 /* QuickBarCodeGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickBarCodeGenerator.m; sourceTree = "<group>"; };
+		89FD55DF207925FD004F28F3 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		A032259E5228CA6C8C04E263 /* Pods-QRCodeUIKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QRCodeUIKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QRCodeUIKit/Pods-QRCodeUIKit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89FD55E0207925FD004F28F3 /* CoreImage.framework in Frameworks */,
 				89FD55D42078FB09004F28F3 /* AVFoundation.framework in Frameworks */,
 				ACEC742F4E7A2230B02DF0F2 /* Pods_QRCodeUIKit.framework in Frameworks */,
 			);
@@ -128,6 +139,7 @@
 		4930F276B3F9C962ADC3F149 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89FD55DF207925FD004F28F3 /* CoreImage.framework */,
 				89FD55D32078FB09004F28F3 /* AVFoundation.framework */,
 				4EADF8C736C4CB159204EBD9 /* Pods_QRCodeUIKit.framework */,
 			);
@@ -174,6 +186,8 @@
 				89B311061FFB7DF0000D07CB /* QuickQRCodeScanController */,
 				89E4BBEE2026DA1100890518 /* QuickBarCodeScanController */,
 				89B311071FFB7E62000D07CB /* QuickTextQRResultController */,
+				89FD55D520791BF5004F28F3 /* QuickQRCodeGenerator */,
+				89FD55D620791C0E004F28F3 /* QuickBarCodeGenerator */,
 				89B310FF1FFB7CD9000D07CB /* Info.plist */,
 			);
 			path = QRCodeUIKit;
@@ -253,6 +267,24 @@
 			path = QuickBarCodeScanController;
 			sourceTree = "<group>";
 		};
+		89FD55D520791BF5004F28F3 /* QuickQRCodeGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				89FD55D720791C40004F28F3 /* QuickQRCodeGenerator.h */,
+				89FD55D820791C40004F28F3 /* QuickQRCodeGenerator.m */,
+			);
+			path = QuickQRCodeGenerator;
+			sourceTree = "<group>";
+		};
+		89FD55D620791C0E004F28F3 /* QuickBarCodeGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				89FD55DB20791C56004F28F3 /* QuickBarCodeGenerator.h */,
+				89FD55DC20791C56004F28F3 /* QuickBarCodeGenerator.m */,
+			);
+			path = QuickBarCodeGenerator;
+			sourceTree = "<group>";
+		};
 		B5E4EEAE6259D45403038DA5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +305,8 @@
 				8904797E1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.h in Headers */,
 				89B3114B1FFC9F79000D07CB /* QuickQRCodeScanView.h in Headers */,
 				89B3114F1FFC9FB5000D07CB /* QuickQRCodeScanViewStyle.h in Headers */,
+				89FD55D920791C40004F28F3 /* QuickQRCodeGenerator.h in Headers */,
+				89FD55DD20791C56004F28F3 /* QuickBarCodeGenerator.h in Headers */,
 				89B311641FFCD918000D07CB /* QuickQRCodeScanResultHandler.h in Headers */,
 				89B311001FFB7CD9000D07CB /* QRCodeUIKit.h in Headers */,
 				89B311531FFCA58B000D07CB /* QuickQRCodeScanLineAnimation.h in Headers */,
@@ -455,6 +489,8 @@
 				89B311501FFC9FB5000D07CB /* QuickQRCodeScanViewStyle.m in Sources */,
 				89B3115C1FFCA5CD000D07CB /* QuickQRCodeScanGridAnimation.m in Sources */,
 				89E4BBF22026DA4F00890518 /* QuickBarCodeScanController.m in Sources */,
+				89FD55DA20791C40004F28F3 /* QuickQRCodeGenerator.m in Sources */,
+				89FD55DE20791C56004F28F3 /* QuickBarCodeGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

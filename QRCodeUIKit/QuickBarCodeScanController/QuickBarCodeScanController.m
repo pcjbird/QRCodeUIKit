@@ -62,7 +62,6 @@
              AVMetadataObjectTypeEAN8Code,
              AVMetadataObjectTypeEAN13Code,
              AVMetadataObjectTypeITF14Code,
-             AVMetadataObjectTypePDF417Code,
              AVMetadataObjectTypeUPCECode
              ];
 }
