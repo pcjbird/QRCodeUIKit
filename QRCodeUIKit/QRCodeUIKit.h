@@ -9,10 +9,10 @@
 //  框架功能:一款让扫码变得简单的视图控制器。
 //  修改记录:
 //     pcjbird    2018-04-08  Version:1.0.9 Build:201804080001
-//                            1.新增二维码和条码生成
+//                            1.新增二维码和条码生成工具类
 //
 //     pcjbird    2018-04-07  Version:1.0.8 Build:201804070001
-//                            1.弃用 ZXingObjC 第三方框架，由于该框架扫描时 CPU 占用 100%，导致手机发烫耗电，官方尚未修复该问题
+//                            1.弃用 ZXingObjC 第三方框架，由于该框架扫码时 CPU 占用 100%，导致手机发烫耗电，官方尚未修复该问题
 //
 //     pcjbird    2018-03-12  Version:1.0.7 Build:201803120001
 //                            1.修复bundle plist "Unexpected CFBundleExecutable Key"的问题
