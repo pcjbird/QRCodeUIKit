@@ -8,11 +8,13 @@
 
 # QRCodeUIKit
 一款让扫码变得简单的视图控制器。
-
+    
+    
 ## 演示 / Demo
 
 <p align="center"><img src="demo.gif" title="demo"></p>
-
+    
+    
 ##  安装 / Installation
 
 方法一：`QRCodeUIKit` is available through CocoaPods. To install it, simply add the following line to your Podfile:
@@ -20,7 +22,8 @@
 ```
 pod 'QRCodeUIKit'
 ```
-
+    
+    
 ## 使用 / Usage
      
 ```
@@ -48,7 +51,8 @@ pod 'QRCodeUIKit'
      self.barcode.image = [QuickBarCodeGenerator generateBarCode:code width:CGRectGetWidth(self.barcode.frame) height:CGRectGetHeight(self.barcode.frame)];
 }
 ```
-
+    
+    
 ## 关注我们 / Follow us
   
 <a href="https://itunes.apple.com/cn/app/iclock-一款满足-挑剔-的翻页时钟与任务闹钟/id1128196970?pt=117947806&ct=com.github.pcjbird.QRCodeUIKit&mt=8"><img src="https://github.com/pcjbird/AssetsExtractor/raw/master/iClock.gif" width="400" title="iClock - 一款满足“挑剔”的翻页时钟与任务闹钟"></a>
