@@ -8,6 +8,10 @@
 //  框架名称:QRCodeUIKit
 //  框架功能:一款让扫码变得简单的视图控制器。
 //  修改记录:
+//     pcjbird    2018-04-08  Version:1.1.0 Build:201804080002
+//                            1.新增二维码和条码识别工具类
+//                            2.重新使用 ZXingObjC 从相册识别条码（非扫描）
+//
 //     pcjbird    2018-04-08  Version:1.0.9 Build:201804080001
 //                            1.新增二维码和条码生成工具类
 //
@@ -76,4 +80,8 @@ FOUNDATION_EXPORT const unsigned char QRCodeUIKitVersionString[];
 
 #if __has_include("QuickBarCodeGenerator.h")
 #import "QuickBarCodeGenerator.h"
+#endif
+
+#if __has_include("QuickQRCodeDetector.h")
+#import "QuickQRCodeDetector.h"
 #endif

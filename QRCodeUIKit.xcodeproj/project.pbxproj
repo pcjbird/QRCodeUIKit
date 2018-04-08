@@ -26,6 +26,8 @@
 		8904797B1FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 890479791FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.m */; };
 		8904797E1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8904797C1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.h */; };
 		8904797F1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8904797D1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.m */; };
+		892C60112079A9C4006301C1 /* QuickQRCodeDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 892C600F2079A9C4006301C1 /* QuickQRCodeDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		892C60122079A9C4006301C1 /* QuickQRCodeDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 892C60102079A9C4006301C1 /* QuickQRCodeDetector.m */; };
 		89B311001FFB7CD9000D07CB /* QRCodeUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 89B310FE1FFB7CD9000D07CB /* QRCodeUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		89B3110A1FFB7EF4000D07CB /* QuickTextQRResultController.h in Headers */ = {isa = PBXBuildFile; fileRef = 89B311081FFB7EF4000D07CB /* QuickTextQRResultController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		89B3110B1FFB7EF4000D07CB /* QuickTextQRResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B311091FFB7EF4000D07CB /* QuickTextQRResultController.m */; };
@@ -70,6 +72,8 @@
 		890479791FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+QRCodeUIKit.m"; sourceTree = "<group>"; };
 		8904797C1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+QRCodeUIKit.h"; sourceTree = "<group>"; };
 		8904797D1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+QRCodeUIKit.m"; sourceTree = "<group>"; };
+		892C600F2079A9C4006301C1 /* QuickQRCodeDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickQRCodeDetector.h; sourceTree = "<group>"; };
+		892C60102079A9C4006301C1 /* QuickQRCodeDetector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickQRCodeDetector.m; sourceTree = "<group>"; };
 		89B310FB1FFB7CD9000D07CB /* QRCodeUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QRCodeUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89B310FE1FFB7CD9000D07CB /* QRCodeUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeUIKit.h; sourceTree = "<group>"; };
 		89B310FF1FFB7CD9000D07CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -157,6 +161,15 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		892C600E2079A998006301C1 /* QuickQRCodeDetector */ = {
+			isa = PBXGroup;
+			children = (
+				892C600F2079A9C4006301C1 /* QuickQRCodeDetector.h */,
+				892C60102079A9C4006301C1 /* QuickQRCodeDetector.m */,
+			);
+			path = QuickQRCodeDetector;
+			sourceTree = "<group>";
+		};
 		89B310F11FFB7CD9000D07CB = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +199,7 @@
 				89B311061FFB7DF0000D07CB /* QuickQRCodeScanController */,
 				89E4BBEE2026DA1100890518 /* QuickBarCodeScanController */,
 				89B311071FFB7E62000D07CB /* QuickTextQRResultController */,
+				892C600E2079A998006301C1 /* QuickQRCodeDetector */,
 				89FD55D520791BF5004F28F3 /* QuickQRCodeGenerator */,
 				89FD55D620791C0E004F28F3 /* QuickBarCodeGenerator */,
 				89B310FF1FFB7CD9000D07CB /* Info.plist */,
@@ -308,6 +322,7 @@
 				89FD55D920791C40004F28F3 /* QuickQRCodeGenerator.h in Headers */,
 				89FD55DD20791C56004F28F3 /* QuickBarCodeGenerator.h in Headers */,
 				89B311641FFCD918000D07CB /* QuickQRCodeScanResultHandler.h in Headers */,
+				892C60112079A9C4006301C1 /* QuickQRCodeDetector.h in Headers */,
 				89B311001FFB7CD9000D07CB /* QRCodeUIKit.h in Headers */,
 				89B311531FFCA58B000D07CB /* QuickQRCodeScanLineAnimation.h in Headers */,
 				89B3115B1FFCA5CD000D07CB /* QuickQRCodeScanGridAnimation.h in Headers */,
@@ -481,6 +496,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8904797F1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.m in Sources */,
+				892C60122079A9C4006301C1 /* QuickQRCodeDetector.m in Sources */,
 				89B311321FFB8B60000D07CB /* QuickQRCodeScanController.m in Sources */,
 				8904797B1FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.m in Sources */,
 				89B3114C1FFC9F79000D07CB /* QuickQRCodeScanView.m in Sources */,

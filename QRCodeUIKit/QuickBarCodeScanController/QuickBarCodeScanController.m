@@ -54,6 +54,11 @@
     return NO;
 }
 
+-(BOOL)shouldQRCodeFromAlbumSupportBarCode
+{
+    return YES;
+}
+
 -(NSArray<AVMetadataObjectType> *)supportedAVMetadataObjectTypes
 {
     return @[AVMetadataObjectTypeCode39Code,

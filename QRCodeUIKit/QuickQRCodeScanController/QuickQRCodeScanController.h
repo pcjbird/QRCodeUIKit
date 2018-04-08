@@ -57,7 +57,7 @@
 /*
  * @brief "我的二维码"按钮点击处理
  */
--(void)OnMyQRBtnClick:(id _Nonnull )sender;
+-(void) OnMyQRBtnClick:(id _Nonnull )sender;
 
 /*
  * @brief 是否支持"可以扫什么"按钮
@@ -67,11 +67,16 @@
 /*
  * @brief "可以扫什么"按钮点击处理
  */
--(void)OnQABtnClick:(id _Nonnull )sender;
+-(void) OnQABtnClick:(id _Nonnull )sender;
 
 /*
- * @brief 当从相册识别二维码时是否应该打开相册的编辑属性
+ * @brief 当从相册识别二维码时是否应该打开相册的编辑属性, 默认YES
  */
--(BOOL)shouldQRCodeFromAlbumWithEdittedImage;
+-(BOOL) shouldQRCodeFromAlbumWithEdittedImage;
+
+/*
+ * @brief 当从相册识别二维码时是否支持条码识别, 默认NO
+ */
+-(BOOL) shouldQRCodeFromAlbumSupportBarCode;
 
 @end
