@@ -43,7 +43,7 @@
 {
     // 生成二维码图片
     CIImage *qrcodeImage;
-    NSData *data = [code dataUsingEncoding:NSISOLatin1StringEncoding allowLossyConversion:false];
+    NSData *data = [code dataUsingEncoding: NSUTF8StringEncoding];
     CIFilter *filter = [CIFilter filterWithName:[[self class] generatorWithType:codeType]];
     
     [filter setValue:data forKey:@"inputMessage"];

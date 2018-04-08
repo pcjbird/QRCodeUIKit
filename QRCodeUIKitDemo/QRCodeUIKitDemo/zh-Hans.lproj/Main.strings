@@ -1,0 +1,12 @@
+
+/* Class = "UIButton"; normalTitle = "条码扫描"; ObjectID = "3VZ-Vp-pH1"; */
+"3VZ-Vp-pH1.normalTitle" = "条码扫描";
+
+/* Class = "UIButton"; normalTitle = "条码生成"; ObjectID = "T2S-iC-lot"; */
+"T2S-iC-lot.normalTitle" = "条码生成";
+
+/* Class = "UIButton"; normalTitle = "二维码扫描"; ObjectID = "aVk-x3-MJW"; */
+"aVk-x3-MJW.normalTitle" = "二维码扫描";
+
+/* Class = "UIButton"; normalTitle = "二维码生成"; ObjectID = "vnn-6q-uRv"; */
+"vnn-6q-uRv.normalTitle" = "二维码生成";
