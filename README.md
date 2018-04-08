@@ -24,8 +24,7 @@ pod 'QRCodeUIKit'
 ```
     
     
-## 使用 / Usage
-     
+## 使用 / Usage   
 ```
 #import <QRCodeUIKit/QRCodeUIKit.h>
      
