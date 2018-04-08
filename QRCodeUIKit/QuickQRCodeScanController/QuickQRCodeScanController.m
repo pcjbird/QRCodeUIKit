@@ -72,9 +72,10 @@
     [self updateLeftBarButtonItems];
     
     _resultText = nil;
+    __weak typeof (self) weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*0.3f), dispatch_get_main_queue(), ^{
-        [_scanView startScanAnimation];
-        if(_captureSession && !_captureSession.running) [_captureSession startRunning];
+        [weakSelf.scanView startScanAnimation];
+        if(weakSelf.captureSession && !weakSelf.captureSession.running) [weakSelf.captureSession startRunning];
     });
     
 }
@@ -117,16 +118,16 @@
     AVCaptureDeviceInput * input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
     if (!input) return FALSE;
     //创建输出流
-    AVCaptureMetadataOutput * output = [[AVCaptureMetadataOutput alloc]init];
+    AVCaptureMetadataOutput * output = [[AVCaptureMetadataOutput alloc] init];
     //设置代理 在主线程里刷新
     [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
     //设置有效扫描区域
     CGRect scanAreaRect = _scanView.scanAreaRect;
-    output.rectOfInterest = scanAreaRect;
+    output.rectOfInterest = [self getRectOfInterestWithScanArea:scanAreaRect];
     //初始化链接对象
     _captureSession = [[AVCaptureSession alloc] init];
     //高质量采集率
-    [_captureSession setSessionPreset:AVCaptureSessionPresetHigh];
+    [_captureSession setSessionPreset:AVCaptureSessionPreset1920x1080];
     
     [_captureSession addInput:input];
     [_captureSession addOutput:output];
@@ -140,6 +141,21 @@
     //开始捕获
     [_captureSession startRunning];
     return TRUE;
+}
+
+#pragma mark-> 获取扫描区域的比例关系
+-(CGRect)getRectOfInterestWithScanArea:(CGRect)rect
+{
+    CGRect bounds = self.view.bounds;
+    CGFloat x = CGRectGetMinX(bounds);
+    CGFloat y = CGRectGetMinY(bounds);
+    CGFloat w = CGRectGetWidth(bounds);
+    CGFloat h = CGRectGetHeight(bounds);
+    CGFloat x1 = CGRectGetMinX(rect);
+    CGFloat y1 = CGRectGetMinY(rect);
+    CGFloat w1 = CGRectGetWidth(rect);
+    CGFloat h1 = CGRectGetHeight(rect);
+    return CGRectMake(y1/y, x1/x, h1/h, w1/w);
 }
 
 -(void) addScanView
@@ -229,30 +245,30 @@
     [_btnTorch addTarget:self action:@selector(OnTorchBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [_bottomView addSubview:_btnTorch];
     
-     if(bMyQRBtnSupport)
-     {
-         self.btnMyQR = [[UIButton alloc]init];
-         _btnMyQR.bounds = CGRectMake(0, 0, width, height);
-         _btnMyQR.center = CGPointMake(flexibleWidth*2.5f, CGRectGetHeight(_bottomView.frame)/2);
-         [_btnMyQR setImage:[UIImage imageNamed:@"qrcode_scan_btn_myqrcode_normal" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-         [_btnMyQR setImage:[UIImage imageNamed:@"qrcode_scan_btn_myqrcode_highlight" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
-         [_btnMyQR addTarget:self action:@selector(OnMyQRBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-         [_bottomView addSubview:_btnMyQR];
-     }
-
-     if([self supportQABtn])
-     {
-         self.btnQA = [[UIButton alloc]init];
-         _btnQA.bounds = CGRectMake(0, 0, width, height);
-         _btnQA.center = CGPointMake(flexibleWidth*(bMyQRBtnSupport ? 3.5f : 2.5f), CGRectGetHeight(_bottomView.frame)/2);
-         [_btnQA setImage:[UIImage imageNamed:@"qrcode_scan_btn_qa_normal" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
-         [_btnQA addTarget:self action:@selector(OnQABtnClick:) forControlEvents:UIControlEventTouchUpInside];
-         [_bottomView addSubview:_btnQA];
-     }
-   
+    if(bMyQRBtnSupport)
+    {
+        self.btnMyQR = [[UIButton alloc]init];
+        _btnMyQR.bounds = CGRectMake(0, 0, width, height);
+        _btnMyQR.center = CGPointMake(flexibleWidth*2.5f, CGRectGetHeight(_bottomView.frame)/2);
+        [_btnMyQR setImage:[UIImage imageNamed:@"qrcode_scan_btn_myqrcode_normal" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [_btnMyQR setImage:[UIImage imageNamed:@"qrcode_scan_btn_myqrcode_highlight" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateHighlighted];
+        [_btnMyQR addTarget:self action:@selector(OnMyQRBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView addSubview:_btnMyQR];
+    }
+    
+    if([self supportQABtn])
+    {
+        self.btnQA = [[UIButton alloc]init];
+        _btnQA.bounds = CGRectMake(0, 0, width, height);
+        _btnQA.center = CGPointMake(flexibleWidth*(bMyQRBtnSupport ? 3.5f : 2.5f), CGRectGetHeight(_bottomView.frame)/2);
+        [_btnQA setImage:[UIImage imageNamed:@"qrcode_scan_btn_qa_normal" inBundle:SDK_BUNDLE compatibleWithTraitCollection:nil] forState:UIControlStateNormal];
+        [_btnQA addTarget:self action:@selector(OnQABtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView addSubview:_btnQA];
+    }
+    
 }
-                                   
-                                   
+
+
 -(void)OnTorchBtnClick:(id)sender
 {
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -378,7 +394,7 @@
     if (metadataObjects.count > 0)
     {
         if (_resultText) return;
-
+        
         AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects firstObject];
         if([self shouldGiveUpAndContinueWithFormat:metadataObject.type detectedText:metadataObject.stringValue]) return;
         NSString *formatString = metadataObject.type;
@@ -405,8 +421,14 @@
 {
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    imagePickerController.modalTransitionStyle=UIModalTransitionStyleFlipHorizontal;
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePickerController.delegate = self;
+    BOOL bShouldEdittedImage = [self shouldQRCodeFromAlbumWithEdittedImage];
+    if(bShouldEdittedImage)
+    {
+        imagePickerController.allowsEditing = YES;
+    }
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:imagePickerController animated:YES completion:nil];
 }
 
@@ -463,7 +485,6 @@
                 QuickTextQRResultController * textQRVC = [[QuickTextQRResultController alloc] initWithText:_resultText];
                 [self.navigationController pushViewController:textQRVC animated:YES];
             }
-            
         }
         else
         {
