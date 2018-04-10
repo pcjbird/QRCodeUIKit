@@ -4,7 +4,10 @@
 [![Pod Platform](http://img.shields.io/cocoapods/p/QRCodeUIKit.svg?style=flat)](http://cocoadocs.org/docsets/QRCodeUIKit/)
 [![Pod License](http://img.shields.io/cocoapods/l/QRCodeUIKit.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![CocoaPods](https://img.shields.io/cocoapods/at/QRCodeUIKit.svg)](https://github.com/pcjbird/QRCodeUIKit)
+[![CocoaPods](https://img.shields.io/cocoapods/dt/QRCodeUIKit.svg)](https://github.com/pcjbird/QRCodeUIKit)
 [![GitHub release](https://img.shields.io/github/release/pcjbird/QRCodeUIKit.svg)](https://github.com/pcjbird/QRCodeUIKit/releases)
+[![GitHub release](https://img.shields.io/github/release-date/pcjbird/QRCodeUIKit.svg)](https://github.com/pcjbird/QRCodeUIKit/releases)
+[![Website](https://img.shields.io/website-pcjbird-down-green-red/https/shields.io.svg?label=author)](https://pcjbird.github.io)
 
 # QRCodeUIKit
 一款让扫码变得简单的视图控制器。
