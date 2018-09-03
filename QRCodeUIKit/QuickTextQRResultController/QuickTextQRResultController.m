@@ -47,7 +47,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.hidesBottomBarWhenPushed = YES;
     self.edgesForExtendedLayout = UIRectEdgeAll;
-    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.extendedLayoutIncludesOpaqueBars = YES;
     if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0 && [[[UIDevice currentDevice] systemVersion] floatValue] < 11.0)
     {
         self.automaticallyAdjustsScrollViewInsets = YES;

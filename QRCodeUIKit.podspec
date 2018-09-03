@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "QRCodeUIKit"
-    s.version          = "1.1.5"
+    s.version          = "1.1.6"
     s.summary          = "一款让扫码变得简单的视图控制器"
     s.description      = <<-DESC
     一款让扫码变得简单的视图控制器,支持 二维码/条码 扫描，可无需一行代码快速集成。

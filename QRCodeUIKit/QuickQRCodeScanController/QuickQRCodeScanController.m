@@ -31,6 +31,8 @@
 @property (strong, nonatomic) QMUIButton *btnRequestCameraAuth;
 @property (strong, nonatomic) QMUIButton *btnRequestAlbumAuth;
 @property (strong, nonatomic) QMUIFillButton *btnGoSetting;
+@property (nonatomic, assign) AVAuthorizationStatus permission;
+@property (nonatomic, assign)PHAuthorizationStatus albumStatus;
 
 //返回按钮
 @property (nonatomic, strong) UIBarButtonItem *backItem;
@@ -118,6 +120,8 @@
     {
         self.automaticallyAdjustsScrollViewInsets = YES;
     }
+    self.permission = -1;
+    self.albumStatus = -1;
     [self addScanView];
     [self addTipView];
     [self addBottomView];
@@ -151,7 +155,9 @@
     }
     AVAuthorizationStatus permission = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
-    
+    if(permission == self.permission && self.albumStatus == status) return;
+    self.permission = permission;
+    self.albumStatus = status;
     if(permission == AVAuthorizationStatusAuthorized && (status == PHAuthorizationStatusAuthorized || status == PHAuthorizationStatusDenied || status == PHAuthorizationStatusRestricted))
     {
         _scanView.hidden = NO;
