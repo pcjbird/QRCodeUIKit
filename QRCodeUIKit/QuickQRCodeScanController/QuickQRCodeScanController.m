@@ -152,7 +152,7 @@
     AVAuthorizationStatus permission = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
     
-    if(permission == AVAuthorizationStatusAuthorized && (status == PHAuthorizationStatusAuthorized || status == PHAuthorizationStatusDenied))
+    if(permission == AVAuthorizationStatusAuthorized && (status == PHAuthorizationStatusAuthorized || status == PHAuthorizationStatusDenied || status == PHAuthorizationStatusRestricted))
     {
         _scanView.hidden = NO;
         _lblScanTip.hidden = NO;
@@ -163,18 +163,24 @@
         _btnRequestAlbumAuth.hidden = YES;
         _btnGoSetting.hidden = YES;
         [self initCaptureSession];
+        
         return;
     }
-        
+    
     _scanView.hidden = YES;
     _lblScanTip.hidden = YES;
     _bottomView.hidden = YES;
     _accessTitleLabel.hidden = NO;
     _accessDescLabel.hidden = NO;
     
-    if(permission == AVAuthorizationStatusDenied)
+    if(permission == AVAuthorizationStatusDenied || permission == AVAuthorizationStatusRestricted)
     {
         [_btnRequestCameraAuth setTitle:[self cameraAuthDeniedText] forState:UIControlStateDisabled];
+        _btnRequestCameraAuth.enabled = NO;
+    }
+    else if(permission == AVAuthorizationStatusAuthorized)
+    {
+        [_btnRequestCameraAuth setTitle:[self cameraAuthAllowedText] forState:UIControlStateDisabled];
         _btnRequestCameraAuth.enabled = NO;
     }
     else
@@ -198,6 +204,8 @@
     {
         _btnRequestAlbumAuth.enabled = YES;
     }
+    [_btnRequestAlbumAuth sizeToFit];
+    _btnRequestAlbumAuth.center = CGPointMake(CGRectGetMidX(self.view.bounds), _btnRequestAlbumAuth.center.y);
     
     _btnGoSetting.hidden = NO;
     [self.view layoutIfNeeded];
@@ -206,6 +214,15 @@
 
 -(BOOL) initCaptureSession
 {
+    if(_captureSession)
+    {
+        __weak typeof (self) weakSelf = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*0.3f), dispatch_get_main_queue(), ^{
+            [weakSelf.scanView startScanAnimation];
+            if(weakSelf.captureSession && !weakSelf.captureSession.running) [weakSelf.captureSession startRunning];
+        });
+        return YES;
+    }
     //获取摄像设备
     AVCaptureDevice * device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     //创建输入流
@@ -265,7 +282,7 @@
 {
     if([_lblScanTip isKindOfClass:[UILabel class]]) return;
     CGRect scanAreaRect = _scanView.scanAreaRect;
-    UILabel * _lblScanTip= [UILabel new];
+    _lblScanTip= [UILabel new];
     _lblScanTip.backgroundColor = [UIColor clearColor];
     _lblScanTip.numberOfLines = 0;
     _lblScanTip.textColor=[UIColor colorWithWhite:1.0f alpha:0.85f];
@@ -351,7 +368,7 @@
         }
         [_btnRequestAlbumAuth setTitle:[self requestAlbumAuthText] forState:UIControlStateNormal];
         [_btnRequestAlbumAuth sizeToFit];
-        _btnRequestAlbumAuth.center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMaxY(_btnRequestCameraAuth.frame) + 15.0f + (CGRectGetHeight(_btnRequestAlbumAuth.frame)/2.0f));
+        _btnRequestAlbumAuth.center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMaxY(_btnRequestCameraAuth.frame) + 20.0f + (CGRectGetHeight(_btnRequestAlbumAuth.frame)/2.0f));
     }
     
     //go setting
@@ -364,7 +381,7 @@
             _btnGoSetting.frame = CGRectMake(0, 0, 130.0f, 35.0f);
             [_btnGoSetting.titleLabel setFont:[UIFont systemFontOfSize:18.0f]];
             _btnGoSetting.titleLabel.adjustsFontSizeToFitWidth = YES;
-            [_btnRequestAlbumAuth addTarget:self action:@selector(OnGoSetting:) forControlEvents:UIControlEventTouchUpInside];
+            [_btnGoSetting addTarget:self action:@selector(OnGoSetting:) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview:_btnGoSetting];
         }
         [_btnGoSetting setTitle:NSLocalizedStringFromTableInBundle(@"Go Setting", @"Localizable", SDK_BUNDLE, nil) forState:UIControlStateNormal];
@@ -376,10 +393,12 @@
 {
     __weak typeof(self) weakSelf = self;
     [self authorizeCameraWithCompletion:^(BOOL granted, BOOL firstTime) {
-       if(granted)
-       {
-           [weakSelf updateControls];
-       }
+        if(granted)
+        {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*0.3f), dispatch_get_main_queue(), ^{
+                [weakSelf updateControls];
+            });
+        }
     }];
 }
 
@@ -423,7 +442,9 @@
     [self authorizePhotoAlbumWithCompletion:^(BOOL granted, BOOL firstTime) {
         if(granted)
         {
-            [weakSelf updateControls];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*0.3f), dispatch_get_main_queue(), ^{
+                [weakSelf updateControls];
+            });
         }
     }];
 }
@@ -755,6 +776,13 @@
 #pragma mark - QRCodeFromAlbum Button Click
 -(void)QRCodeFromAlbum:(id)sender
 {
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    
+    if(status == PHAuthorizationStatusDenied || status == PHAuthorizationStatusRestricted)
+    {
+        [self.view makeToast:[self albumAuthDeniedText] duration:3.0f position:CSToastPositionCenter style:[CSToastManager sharedStyle]];
+        return;
+    }
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
     imagePickerController.modalTransitionStyle=UIModalTransitionStyleFlipHorizontal;
