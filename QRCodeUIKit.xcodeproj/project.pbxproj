@@ -56,6 +56,7 @@
 		89B311641FFCD918000D07CB /* QuickQRCodeScanResultHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 89B311631FFCD419000D07CB /* QuickQRCodeScanResultHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		89E4BBF12026DA4F00890518 /* QuickBarCodeScanController.h in Headers */ = {isa = PBXBuildFile; fileRef = 89E4BBEF2026DA4F00890518 /* QuickBarCodeScanController.h */; };
 		89E4BBF22026DA4F00890518 /* QuickBarCodeScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E4BBF02026DA4F00890518 /* QuickBarCodeScanController.m */; };
+		89FC5120213D16250002EC4E /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FC511F213D16250002EC4E /* Photos.framework */; };
 		89FD55D42078FB09004F28F3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FD55D32078FB09004F28F3 /* AVFoundation.framework */; };
 		89FD55D920791C40004F28F3 /* QuickQRCodeGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 89FD55D720791C40004F28F3 /* QuickQRCodeGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		89FD55DA20791C40004F28F3 /* QuickQRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 89FD55D820791C40004F28F3 /* QuickQRCodeGenerator.m */; };
@@ -110,6 +111,8 @@
 		89B311631FFCD419000D07CB /* QuickQRCodeScanResultHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickQRCodeScanResultHandler.h; sourceTree = "<group>"; };
 		89E4BBEF2026DA4F00890518 /* QuickBarCodeScanController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickBarCodeScanController.h; sourceTree = "<group>"; };
 		89E4BBF02026DA4F00890518 /* QuickBarCodeScanController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickBarCodeScanController.m; sourceTree = "<group>"; };
+		89FC511D213D161D0002EC4E /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
+		89FC511F213D16250002EC4E /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		89FD55D32078FB09004F28F3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		89FD55D720791C40004F28F3 /* QuickQRCodeGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickQRCodeGenerator.h; sourceTree = "<group>"; };
 		89FD55D820791C40004F28F3 /* QuickQRCodeGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickQRCodeGenerator.m; sourceTree = "<group>"; };
@@ -124,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89FC5120213D16250002EC4E /* Photos.framework in Frameworks */,
 				89FD55E0207925FD004F28F3 /* CoreImage.framework in Frameworks */,
 				89FD55D42078FB09004F28F3 /* AVFoundation.framework in Frameworks */,
 				ACEC742F4E7A2230B02DF0F2 /* Pods_QRCodeUIKit.framework in Frameworks */,
@@ -143,6 +147,8 @@
 		4930F276B3F9C962ADC3F149 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89FC511F213D16250002EC4E /* Photos.framework */,
+				89FC511D213D161D0002EC4E /* PhotosUI.framework */,
 				89FD55DF207925FD004F28F3 /* CoreImage.framework */,
 				89FD55D32078FB09004F28F3 /* AVFoundation.framework */,
 				4EADF8C736C4CB159204EBD9 /* Pods_QRCodeUIKit.framework */,
@@ -377,7 +383,7 @@
 		89B310F21FFB7CD9000D07CB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Zero Status";
 				TargetAttributes = {
 					89B310FA1FFB7CD9000D07CB = {
@@ -547,6 +553,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -554,6 +561,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -606,6 +614,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -613,6 +622,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

@@ -52,7 +52,7 @@
     [UIView animateWithDuration:1.4 animations:^{
         weakSelf.alpha = 1.0;
         
-        _scanImageView.frame = CGRectMake(0, scanNetImageViewW-scanNetImageH, scanNetImageViewW, scanNetImageH);
+        weakSelf.scanImageView.frame = CGRectMake(0, scanNetImageViewW-scanNetImageH, scanNetImageViewW, scanNetImageH);
         
     } completion:^(BOOL finished)
      {

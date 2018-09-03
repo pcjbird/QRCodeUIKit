@@ -51,12 +51,12 @@
      }];
     
     [UIView animateWithDuration:3 animations:^{
-        CGFloat leftx = _animationRect.origin.x + 5;
-        CGFloat width = _animationRect.size.width - 10;
+        CGFloat leftx = weakSelf.animationRect.origin.x + 5;
+        CGFloat width = weakSelf.animationRect.size.width - 10;
         
         
         
-        weakSelf.frame = CGRectMake(leftx, _animationRect.origin.y + _animationRect.size.height - 8, width, 4);
+        weakSelf.frame = CGRectMake(leftx, weakSelf.animationRect.origin.y + weakSelf.animationRect.size.height - 8, width, 4);
         
     } completion:^(BOOL finished)
      {

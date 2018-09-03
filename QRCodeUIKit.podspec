@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = "QRCodeUIKit"
-    s.version          = "1.1.2"
+    s.version          = "1.1.3"
     s.summary          = "一款让扫码变得简单的视图控制器"
     s.description      = <<-DESC
     一款让扫码变得简单的视图控制器,支持 二维码/条码 扫描，可无需一行代码快速集成。
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 #s.screenshot       = ''
 
     s.platform         = :ios, '8.0'
-    s.frameworks       = 'Foundation', 'UIKit', 'CoreGraphics', 'AVFoundation', 'CoreImage'
+    s.frameworks       = 'Foundation', 'UIKit', 'CoreGraphics', 'AVFoundation', 'CoreImage', 'Photos'
 #s.preserve_paths   = ''
     s.source_files     = 'QRCodeUIKit/*.{h,m}', 'QRCodeUIKit/Categories/*.{h,m}'
     s.public_header_files = 'QRCodeUIKit/*.{h}'
@@ -38,6 +38,7 @@ Pod::Spec.new do |s|
         ss.dependency 'Toast'
         ss.dependency 'QRCodeUIKit/QuickTextQRResultController'
         ss.dependency 'ZXingObjC'
+        ss.dependency 'QMUIKit/QMUIComponents/QMUIFillButton'
     end
 
     s.subspec 'QuickBarCodeScanController' do |ss|

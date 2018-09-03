@@ -24,8 +24,56 @@
 @property (nonatomic, strong, nullable) id<QuickQRCodeScanResultHandler> resultHandler;
 
 /*
- * @brief 扫描提示
- * @return 提示文本
+ * @brief 授权标题
+ * @return 标题文本
+ */
+-(NSString*_Nonnull) accessTitleText;
+
+/*
+ * @brief 授权描述
+ * @return 描述文本
+ */
+-(NSString*_Nonnull) accessDescText;
+
+/*
+ * @brief 相机权限请求文本提示
+ * @return 请求文本提示
+ */
+-(NSString*_Nonnull) requestCameraAuthText;
+
+/*
+ * @brief 相机权限受限文本提示
+ * @return 受限文本提示
+ */
+-(NSString*_Nonnull) cameraAuthDeniedText;
+
+/*
+ * @brief 相机权限被允许文本提示
+ * @return 被允许文本提示
+ */
+-(NSString*_Nonnull) cameraAuthAllowedText;
+
+/*
+ * @brief 相册权限请求文本提示
+ * @return 请求文本提示
+ */
+-(NSString*_Nonnull) requestAlbumAuthText;
+
+/*
+ * @brief 相册权限受限文本提示
+ * @return 受限文本提示
+ */
+-(NSString*_Nonnull) albumAuthDeniedText;
+
+/*
+ * @brief 相册权限被允许文本提示
+ * @return 被允许文本提示
+ */
+-(NSString*_Nonnull) albumAuthAllowedText;
+
+/*
+ * @brief 扫描提示提示
+ * @return 提示文本提示
  */
 -(NSString *_Nonnull) scanTipText;
 

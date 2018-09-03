@@ -13,3 +13,14 @@
 "unknown barcode"="无法识别的条码";
 "Scan Result" = "扫描结果";
 "PressCopyTip" = "*长按虚线框，复制扫描结果。";
+
+"StartScanAccessTitle" = "开启您的扫码之旅";
+"StartScanAccessDesc" = "允许访问即可通过您的相机扫描二维码或条码信息，此外还可以识别来自相册的二维码或条码图片。";
+"CameraNotSupport" = "您的设备不支持相机功能";
+"RequestCameraAuthText" = "允许访问您的相机";
+"CameraAuthDeniedText" = "您的相机已被禁止访问";
+"CameraAuthAllowedText" = "您的相机已允许访问";
+"RequestAlbumAuthText" = "允许访问您的相册";
+"AlbumAuthDeniedText" = "您的相册已被禁止访问";
+"AlbumAutAllowedText" = "您的相册已允许访问";
+"Go Setting" = "前往设置";

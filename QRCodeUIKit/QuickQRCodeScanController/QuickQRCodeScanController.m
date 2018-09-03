@@ -9,8 +9,10 @@
 #import "QuickQRCodeScanController.h"
 #import "UIViewController+QRCodeUIKit.h"
 #import "UINavigationController+QRCodeUIKit.h"
+#import <Photos/Photos.h>
 #import <Toast/Toast.h>
 #import <ZXingObjC/ZXingObjC.h>
+#import <QMUIKit/QMUIKit.h>
 #import "QuickQRCodeScanView.h"
 #import "QuickTextQRResultController.h"
 
@@ -23,6 +25,13 @@
     CGAffineTransform _captureSizeTransform;
     BOOL           _translucent;
 }
+
+@property (strong, nonatomic) UILabel *accessTitleLabel;
+@property (strong, nonatomic) UILabel *accessDescLabel;
+@property (strong, nonatomic) QMUIButton *btnRequestCameraAuth;
+@property (strong, nonatomic) QMUIButton *btnRequestAlbumAuth;
+@property (strong, nonatomic) QMUIFillButton *btnGoSetting;
+
 //返回按钮
 @property (nonatomic, strong) UIBarButtonItem *backItem;
 @property (nonatomic, strong) QuickQRCodeScanViewStyle *style;
@@ -52,6 +61,11 @@
         [self initVariables];
     }
     return self;
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void) initVariables
@@ -107,7 +121,87 @@
     [self addScanView];
     [self addTipView];
     [self addBottomView];
-    [self initCaptureSession];
+    [self addAccessView];
+    [self updateControls];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OnAppDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+-(void)OnAppDidBecomeActive:(NSNotification*)notifiaction
+{
+    [self updateControls];
+}
+
+-(void) updateControls
+{
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        _scanView.hidden = YES;
+        _lblScanTip.hidden = YES;
+        _bottomView.hidden = YES;
+        _accessTitleLabel.hidden = NO;
+        _accessDescLabel.hidden = NO;
+        [_btnRequestCameraAuth setTitle:NSLocalizedStringFromTableInBundle(@"CameraNotSupport", @"Localizable", SDK_BUNDLE, nil) forState:UIControlStateDisabled];
+        _btnRequestCameraAuth.enabled = NO;
+        [_btnRequestCameraAuth sizeToFit];
+        _btnRequestCameraAuth.center = CGPointMake(CGRectGetMidX(self.view.bounds), _btnRequestCameraAuth.center.y);
+        _btnRequestAlbumAuth.hidden = YES;
+        _btnGoSetting.hidden = YES;
+        [self.view layoutIfNeeded];
+        return;
+    }
+    AVAuthorizationStatus permission = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    
+    if(permission == AVAuthorizationStatusAuthorized && (status == PHAuthorizationStatusAuthorized || status == PHAuthorizationStatusDenied))
+    {
+        _scanView.hidden = NO;
+        _lblScanTip.hidden = NO;
+        _bottomView.hidden = NO;
+        _accessTitleLabel.hidden = YES;
+        _accessDescLabel.hidden = YES;
+        _btnRequestCameraAuth.hidden = YES;
+        _btnRequestAlbumAuth.hidden = YES;
+        _btnGoSetting.hidden = YES;
+        [self initCaptureSession];
+        return;
+    }
+        
+    _scanView.hidden = YES;
+    _lblScanTip.hidden = YES;
+    _bottomView.hidden = YES;
+    _accessTitleLabel.hidden = NO;
+    _accessDescLabel.hidden = NO;
+    
+    if(permission == AVAuthorizationStatusDenied)
+    {
+        [_btnRequestCameraAuth setTitle:[self cameraAuthDeniedText] forState:UIControlStateDisabled];
+        _btnRequestCameraAuth.enabled = NO;
+    }
+    else
+    {
+        _btnRequestCameraAuth.enabled = YES;
+    }
+    [_btnRequestCameraAuth sizeToFit];
+    _btnRequestCameraAuth.center = CGPointMake(CGRectGetMidX(self.view.bounds), _btnRequestCameraAuth.center.y);
+    
+    if(status == PHAuthorizationStatusDenied)
+    {
+        [_btnRequestAlbumAuth setTitle:[self albumAuthDeniedText] forState:UIControlStateDisabled];
+        _btnRequestAlbumAuth.enabled = NO;
+    }
+    else if(status == PHAuthorizationStatusAuthorized)
+    {
+        [_btnRequestAlbumAuth setTitle:[self albumAuthAllowedText] forState:UIControlStateDisabled];
+        _btnRequestAlbumAuth.enabled = NO;
+    }
+    else
+    {
+        _btnRequestAlbumAuth.enabled = YES;
+    }
+    
+    _btnGoSetting.hidden = NO;
+    [self.view layoutIfNeeded];
+    return;
 }
 
 -(BOOL) initCaptureSession
@@ -182,6 +276,248 @@
     _lblScanTip.frame = CGRectMake((CGRectGetWidth([UIScreen mainScreen].bounds) - size.width)/2, CGRectGetMaxY(scanAreaRect) + 25.0f, size.width, size.height);
     _lblScanTip.clipsToBounds = YES;
     [self.view addSubview:_lblScanTip];
+}
+
+-(void) addAccessView
+{
+    CGRect bounds = self.view.bounds;
+    //access title
+    {
+        if(![_accessTitleLabel isKindOfClass:[UILabel class]])
+        {
+            _accessTitleLabel = [UILabel new];
+            _accessTitleLabel.backgroundColor = [UIColor clearColor];
+            if (@available(iOS 8.2, *)) {
+                _accessTitleLabel.font = [UIFont systemFontOfSize:26.0f weight:UIFontWeightMedium];
+            } else {
+                _accessTitleLabel.font = [UIFont boldSystemFontOfSize:26.0f];
+            }
+            _accessTitleLabel.textColor = [UIColor colorWithWhite:1.0f alpha:0.8f];
+            _accessTitleLabel.textAlignment = NSTextAlignmentJustified;
+            [self.view addSubview:_accessTitleLabel];
+        }
+        _accessTitleLabel.text = [self accessTitleText];
+        [_accessTitleLabel sizeToFit];
+        _accessTitleLabel.center = CGPointMake(CGRectGetMidX(bounds), 186.0f);
+    }
+    
+    //access desc
+    {
+        if(![_accessDescLabel isKindOfClass:[UILabel class]])
+        {
+            _accessDescLabel = [UILabel new];
+            _accessDescLabel.backgroundColor = [UIColor clearColor];
+            if (@available(iOS 8.2, *)) {
+                _accessDescLabel.font = [UIFont systemFontOfSize:14.0f weight:UIFontWeightLight];
+            } else {
+                _accessDescLabel.font = [UIFont systemFontOfSize:14.0f];
+            }
+            _accessDescLabel.textColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
+            _accessDescLabel.textAlignment = NSTextAlignmentJustified;
+            _accessDescLabel.numberOfLines = 3;
+            [self.view addSubview:_accessDescLabel];
+        }
+        _accessDescLabel.text = [self accessDescText];
+        CGSize size = [_accessDescLabel sizeThatFits:CGSizeMake(CGRectGetWidth(bounds) - 100.0f, HUGE)];
+        _accessDescLabel.frame = CGRectMake(50.0f, CGRectGetMaxY(_accessTitleLabel.frame) + 15.0f, size.width, size.height);
+    }
+    
+    //request camera auth
+    {
+        if(![_btnRequestCameraAuth isKindOfClass:[QMUIButton class]])
+        {
+            _btnRequestCameraAuth = [QMUIButton new];
+            [_btnRequestCameraAuth setTitleColor:[UIColor qmui_colorWithHexString:@"#003FCA"] forState:UIControlStateNormal];
+            [_btnRequestCameraAuth setTitleColor:[UIColor qmui_colorWithHexString:@"#cccccc"] forState:UIControlStateDisabled];
+            [_btnRequestCameraAuth.titleLabel setFont:[UIFont systemFontOfSize:14.0f]];
+            [_btnRequestCameraAuth addTarget:self action:@selector(OnRequestCameraAuth:) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:_btnRequestCameraAuth];
+        }
+        [_btnRequestCameraAuth setTitle:[self requestCameraAuthText] forState:UIControlStateNormal];
+        [_btnRequestCameraAuth sizeToFit];
+        _btnRequestCameraAuth.center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMaxY(_accessDescLabel.frame) + 90.0f + (CGRectGetHeight(_btnRequestCameraAuth.frame)/2.0f));
+    }
+    
+    //request photo album auth
+    {
+        if(![_btnRequestAlbumAuth isKindOfClass:[QMUIButton class]])
+        {
+            _btnRequestAlbumAuth = [QMUIButton new];
+            [_btnRequestAlbumAuth setTitleColor:[UIColor qmui_colorWithHexString:@"#003FCA"] forState:UIControlStateNormal];
+            [_btnRequestAlbumAuth setTitleColor:[UIColor qmui_colorWithHexString:@"#cccccc"] forState:UIControlStateDisabled];
+            [_btnRequestAlbumAuth.titleLabel setFont:[UIFont systemFontOfSize:14.0f]];
+            [_btnRequestAlbumAuth addTarget:self action:@selector(OnRequestAlbumAuth:) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:_btnRequestAlbumAuth];
+        }
+        [_btnRequestAlbumAuth setTitle:[self requestAlbumAuthText] forState:UIControlStateNormal];
+        [_btnRequestAlbumAuth sizeToFit];
+        _btnRequestAlbumAuth.center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMaxY(_btnRequestCameraAuth.frame) + 15.0f + (CGRectGetHeight(_btnRequestAlbumAuth.frame)/2.0f));
+    }
+    
+    //go setting
+    {
+        if(![_btnGoSetting isKindOfClass:[QMUIFillButton class]])
+        {
+            _btnGoSetting = [QMUIFillButton new];
+            _btnGoSetting.fillColor = [UIColor qmui_colorWithHexString:@"#FC3131"];
+            _btnGoSetting.titleTextColor = [UIColor whiteColor];
+            _btnGoSetting.frame = CGRectMake(0, 0, 130.0f, 35.0f);
+            [_btnGoSetting.titleLabel setFont:[UIFont systemFontOfSize:18.0f]];
+            _btnGoSetting.titleLabel.adjustsFontSizeToFitWidth = YES;
+            [_btnRequestAlbumAuth addTarget:self action:@selector(OnGoSetting:) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:_btnGoSetting];
+        }
+        [_btnGoSetting setTitle:NSLocalizedStringFromTableInBundle(@"Go Setting", @"Localizable", SDK_BUNDLE, nil) forState:UIControlStateNormal];
+        _btnGoSetting.center = CGPointMake(CGRectGetMidX(bounds), CGRectGetMaxY(_btnRequestAlbumAuth.frame) + 50.0f + (CGRectGetHeight(_btnGoSetting.frame)/2.0f));
+    }
+}
+
+-(void) OnRequestCameraAuth:(id)sender
+{
+    __weak typeof(self) weakSelf = self;
+    [self authorizeCameraWithCompletion:^(BOOL granted, BOOL firstTime) {
+       if(granted)
+       {
+           [weakSelf updateControls];
+       }
+    }];
+}
+
+- (void)authorizeCameraWithCompletion:(void(^)(BOOL granted,BOOL firstTime))completion
+{
+    if ([AVCaptureDevice respondsToSelector:@selector(authorizationStatusForMediaType:)])
+    {
+        AVAuthorizationStatus permission = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        
+        switch (permission) {
+            case AVAuthorizationStatusAuthorized:
+                completion(YES,NO);
+                break;
+            case AVAuthorizationStatusDenied:
+            case AVAuthorizationStatusRestricted:
+                completion(NO,NO);
+                break;
+            case AVAuthorizationStatusNotDetermined:
+            {
+                [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+                    if (completion)
+                    {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            completion(granted,YES);
+                        });
+                    }
+                }];
+                
+            }
+                break;
+        }
+    } else {
+        // Prior to iOS 7 all apps were authorized.
+        completion(YES,NO);
+    }
+}
+
+-(void) OnRequestAlbumAuth:(id)sender
+{
+    __weak typeof(self) weakSelf = self;
+    [self authorizePhotoAlbumWithCompletion:^(BOOL granted, BOOL firstTime) {
+        if(granted)
+        {
+            [weakSelf updateControls];
+        }
+    }];
+}
+
+- (void)authorizePhotoAlbumWithCompletion:(void(^)(BOOL granted,BOOL firstTime))completion
+{
+    PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
+    
+    switch (status)
+    {
+        case PHAuthorizationStatusAuthorized:
+        {
+            if (completion)
+            {
+                completion(YES,NO);
+            }
+        }
+            break;
+        case PHAuthorizationStatusRestricted:
+        case PHAuthorizationStatusDenied:
+        {
+            if (completion)
+            {
+                completion(NO,NO);
+            }
+        }
+            break;
+        case PHAuthorizationStatusNotDetermined:
+        {
+            [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+                if (completion) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completion(status == PHAuthorizationStatusAuthorized,YES);
+                    });
+                }
+            }];
+        }
+            break;
+        default:
+        {
+            if (completion)
+            {
+                completion(NO,NO);
+            }
+        }
+            break;
+    }
+}
+
+-(void) OnGoSetting:(id)sender
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+}
+
+-(NSString*) accessTitleText
+{
+    return NSLocalizedStringFromTableInBundle(@"StartScanAccessTitle", @"Localizable", SDK_BUNDLE, nil);
+}
+
+-(NSString*) accessDescText
+{
+    return NSLocalizedStringFromTableInBundle(@"StartScanAccessDesc", @"Localizable", SDK_BUNDLE, nil);
+}
+
+-(NSString*) requestCameraAuthText
+{
+    return NSLocalizedStringFromTableInBundle(@"RequestCameraAuthText", @"Localizable", SDK_BUNDLE, nil);
+}
+
+-(NSString*) cameraAuthDeniedText
+{
+    return NSLocalizedStringFromTableInBundle(@"CameraAuthDeniedText", @"Localizable", SDK_BUNDLE, nil);
+}
+
+
+-(NSString*) cameraAuthAllowedText
+{
+    return NSLocalizedStringFromTableInBundle(@"CameraAuthAllowedText", @"Localizable", SDK_BUNDLE, nil);
+}
+
+-(NSString*) requestAlbumAuthText
+{
+    return NSLocalizedStringFromTableInBundle(@"RequestAlbumAuthText", @"Localizable", SDK_BUNDLE, nil);
+}
+
+-(NSString*) albumAuthDeniedText
+{
+    return NSLocalizedStringFromTableInBundle(@"AlbumAuthDeniedText", @"Localizable", SDK_BUNDLE, nil);
+}
+
+
+-(NSString*_Nonnull) albumAuthAllowedText
+{
+    return NSLocalizedStringFromTableInBundle(@"AlbumAutAllowedText", @"Localizable", SDK_BUNDLE, nil);
 }
 
 -(NSString *) scanTipText

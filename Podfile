@@ -12,4 +12,5 @@ target 'QRCodeUIKit' do
   pod 'Toast'
   pod 'TTTAttributedLabel'
   pod 'ZXingObjC'
+  pod 'QMUIKit/QMUIComponents/QMUIFillButton'
 end
