@@ -207,7 +207,7 @@
     [_btnRequestAlbumAuth sizeToFit];
     _btnRequestAlbumAuth.center = CGPointMake(CGRectGetMidX(self.view.bounds), _btnRequestAlbumAuth.center.y);
     
-    _btnGoSetting.hidden = NO;
+    _btnGoSetting.hidden = !(permission == AVAuthorizationStatusDenied || permission == AVAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied|| status == PHAuthorizationStatusRestricted);
     [self.view layoutIfNeeded];
     return;
 }
