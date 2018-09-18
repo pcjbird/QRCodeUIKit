@@ -15,7 +15,10 @@
 // 设置导航栏背景透明度
 - (void)qrcodeuikit_SetNeedsNavigationBackground:(CGFloat)alpha {
     // 导航栏背景透明度设置
-    UIView *barBackgroundView = [[self.navigationBar subviews] objectAtIndex:0];// _UIBarBackground
+    NSArray *subViews = [self.navigationBar subviews];
+    if([subViews count] == 0) return;
+    UIView *barBackgroundView = [subViews objectAtIndex:0];// _UIBarBackground
+    if([[barBackgroundView subviews] count] == 0) return;
     UIImageView *backgroundImageView = [[barBackgroundView subviews] objectAtIndex:0];// UIImageView
     if (self.navigationBar.isTranslucent)
     {
