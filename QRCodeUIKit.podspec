@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
     s.public_header_files = 'QRCodeUIKit/*.{h}'
 
     s.resource_bundles = {
-    'QRCodeUIKit' => ['QRCodeUIKitBundle/*.png','QRCodeUIKitBundle/*.strings'],
+        'QRCodeUIKit' => ['QRCodeUIKitBundle/*.{png,strings}'],
     }
 
     s.pod_target_xcconfig = { 'OTHER_LDFLAGS' => '-lObjC' }
