@@ -8,6 +8,9 @@
 //  框架名称:QRCodeUIKit
 //  框架功能:一款让扫码变得简单的视图控制器。
 //  修改记录:
+//     pcjbird    2018-12-03  Version:1.1.9 Build:201812030002
+//                            1.CocoaPods 本地化文件未能正确包含的问题修复。
+//
 //     pcjbird    2018-12-03  Version:1.1.8 Build:201812030001
 //                            1.进一步适配iPhone XR/iPhone XS Max。
 //
