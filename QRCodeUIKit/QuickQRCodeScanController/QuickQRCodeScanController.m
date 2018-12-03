@@ -569,8 +569,8 @@
 -(void)addBottomView
 {
     if ([_bottomView isKindOfClass:[UIView class]]) return;
-    BOOL isIPhoneX = (CGRectGetHeight([UIScreen mainScreen].bounds) == 812.0f);
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.bounds)- 100 - (isIPhoneX ? 34 : 0), CGRectGetWidth(self.view.frame), 100)];
+    
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.bounds)- 100 - (IS_NOTCHED_SCREEN ? 34 : 0), CGRectGetWidth(self.view.frame), 100)];
     _bottomView.backgroundColor = [UIColor clearColor];
     
     [self.view addSubview:_bottomView];

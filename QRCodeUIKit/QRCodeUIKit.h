@@ -8,6 +8,9 @@
 //  框架名称:QRCodeUIKit
 //  框架功能:一款让扫码变得简单的视图控制器。
 //  修改记录:
+//     pcjbird    2018-12-03  Version:1.1.8 Build:201812030001
+//                            1.进一步适配iPhone XR/iPhone XS Max。
+//
 //     pcjbird    2018-09-18  Version:1.1.7 Build:201809180001
 //                            1.修复在 iPhone XS Max 上 Crash 的问题。
 //
