@@ -264,15 +264,13 @@
 -(CGRect)getRectOfInterestWithScanArea:(CGRect)rect
 {
     CGRect bounds = self.view.bounds;
-    CGFloat x = CGRectGetMinX(bounds);
-    CGFloat y = CGRectGetMinY(bounds);
     CGFloat w = CGRectGetWidth(bounds);
     CGFloat h = CGRectGetHeight(bounds);
     CGFloat x1 = CGRectGetMinX(rect);
     CGFloat y1 = CGRectGetMinY(rect);
     CGFloat w1 = CGRectGetWidth(rect);
     CGFloat h1 = CGRectGetHeight(rect);
-    return CGRectMake(y1/y, x1/x, h1/h, w1/w);
+    return CGRectMake(y1/h, x1/w, h1/h, w1/w);
 }
 
 -(void) addScanView
