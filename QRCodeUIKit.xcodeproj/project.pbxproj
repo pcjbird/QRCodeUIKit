@@ -26,6 +26,13 @@
 		8904797B1FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 890479791FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.m */; };
 		8904797E1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8904797C1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.h */; };
 		8904797F1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8904797D1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.m */; };
+		8915070B249205660040D38C /* qrcode_scan_btn_album_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8915070D249205660040D38C /* qrcode_scan_btn_album_normal@2x.png */; };
+		8915070E249206360040D38C /* qrcode_scan_btn_album_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89150710249206360040D38C /* qrcode_scan_btn_album_highlight@2x.png */; };
+		89150715249206550040D38C /* qrcode_scan_btn_closetorch_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89150717249206550040D38C /* qrcode_scan_btn_closetorch_normal@2x.png */; };
+		8915071A249206670040D38C /* qrcode_scan_btn_myqrcode_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8915071C249206670040D38C /* qrcode_scan_btn_myqrcode_highlight@2x.png */; };
+		8915071F249206780040D38C /* qrcode_scan_btn_myqrcode_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89150721249206780040D38C /* qrcode_scan_btn_myqrcode_normal@2x.png */; };
+		891507242492068A0040D38C /* qrcode_scan_btn_opentorch_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 891507262492068A0040D38C /* qrcode_scan_btn_opentorch_normal@2x.png */; };
+		891507292492069C0040D38C /* qrcode_scan_btn_qa_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8915072B2492069C0040D38C /* qrcode_scan_btn_qa_normal@2x.png */; };
 		892C60112079A9C4006301C1 /* QuickQRCodeDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 892C600F2079A9C4006301C1 /* QuickQRCodeDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		892C60122079A9C4006301C1 /* QuickQRCodeDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 892C60102079A9C4006301C1 /* QuickQRCodeDetector.m */; };
 		89B311001FFB7CD9000D07CB /* QRCodeUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 89B310FE1FFB7CD9000D07CB /* QRCodeUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,13 +43,6 @@
 		89B311321FFB8B60000D07CB /* QuickQRCodeScanController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B311301FFB8B60000D07CB /* QuickQRCodeScanController.m */; };
 		89B311361FFC7190000D07CB /* navbar_return@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B311341FFC718F000D07CB /* navbar_return@3x.png */; };
 		89B311371FFC7190000D07CB /* navbar_return@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B311351FFC718F000D07CB /* navbar_return@2x.png */; };
-		89B311401FFC9DD3000D07CB /* qrcode_scan_btn_album_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B311381FFC9DD2000D07CB /* qrcode_scan_btn_album_highlight@2x.png */; };
-		89B311411FFC9DD3000D07CB /* qrcode_scan_btn_myqrcode_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B311391FFC9DD3000D07CB /* qrcode_scan_btn_myqrcode_highlight@2x.png */; };
-		89B311421FFC9DD3000D07CB /* qrcode_scan_btn_opentorch_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B3113A1FFC9DD3000D07CB /* qrcode_scan_btn_opentorch_normal@2x.png */; };
-		89B311431FFC9DD3000D07CB /* qrcode_scan_btn_album_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B3113B1FFC9DD3000D07CB /* qrcode_scan_btn_album_normal@2x.png */; };
-		89B311451FFC9DD3000D07CB /* qrcode_scan_btn_qa_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B3113D1FFC9DD3000D07CB /* qrcode_scan_btn_qa_normal@2x.png */; };
-		89B311461FFC9DD3000D07CB /* qrcode_scan_btn_closetorch_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B3113E1FFC9DD3000D07CB /* qrcode_scan_btn_closetorch_normal@2x.png */; };
-		89B311471FFC9DD3000D07CB /* qrcode_scan_btn_myqrcode_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89B3113F1FFC9DD3000D07CB /* qrcode_scan_btn_myqrcode_normal@2x.png */; };
 		89B3114B1FFC9F79000D07CB /* QuickQRCodeScanView.h in Headers */ = {isa = PBXBuildFile; fileRef = 89B311491FFC9F79000D07CB /* QuickQRCodeScanView.h */; };
 		89B3114C1FFC9F79000D07CB /* QuickQRCodeScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B3114A1FFC9F79000D07CB /* QuickQRCodeScanView.m */; };
 		89B3114F1FFC9FB5000D07CB /* QuickQRCodeScanViewStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 89B3114D1FFC9FB5000D07CB /* QuickQRCodeScanViewStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -74,6 +74,27 @@
 		8904797C1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+QRCodeUIKit.h"; sourceTree = "<group>"; };
 		8904797D1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+QRCodeUIKit.m"; sourceTree = "<group>"; };
 		891506522491EA990040D38C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8915070C249205660040D38C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/qrcode_scan_btn_album_normal@2x.png"; sourceTree = "<group>"; };
+		8915070F249206360040D38C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/qrcode_scan_btn_album_highlight@2x.png"; sourceTree = "<group>"; };
+		891507112492063C0040D38C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/qrcode_scan_btn_album_highlight@2x.png"; sourceTree = "<group>"; };
+		89150712249206420040D38C /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = "ja.lproj/qrcode_scan_btn_album_highlight@2x.png"; sourceTree = "<group>"; };
+		89150713249206460040D38C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/qrcode_scan_btn_album_normal@2x.png"; sourceTree = "<group>"; };
+		891507142492064E0040D38C /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = "ja.lproj/qrcode_scan_btn_album_normal@2x.png"; sourceTree = "<group>"; };
+		89150716249206550040D38C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/qrcode_scan_btn_closetorch_normal@2x.png"; sourceTree = "<group>"; };
+		89150718249206590040D38C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/qrcode_scan_btn_closetorch_normal@2x.png"; sourceTree = "<group>"; };
+		891507192492065B0040D38C /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = "ja.lproj/qrcode_scan_btn_closetorch_normal@2x.png"; sourceTree = "<group>"; };
+		8915071B249206670040D38C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/qrcode_scan_btn_myqrcode_highlight@2x.png"; sourceTree = "<group>"; };
+		8915071D2492066D0040D38C /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = "ja.lproj/qrcode_scan_btn_myqrcode_highlight@2x.png"; sourceTree = "<group>"; };
+		8915071E249206710040D38C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/qrcode_scan_btn_myqrcode_highlight@2x.png"; sourceTree = "<group>"; };
+		89150720249206780040D38C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/qrcode_scan_btn_myqrcode_normal@2x.png"; sourceTree = "<group>"; };
+		891507222492067E0040D38C /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = "ja.lproj/qrcode_scan_btn_myqrcode_normal@2x.png"; sourceTree = "<group>"; };
+		89150723249206820040D38C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/qrcode_scan_btn_myqrcode_normal@2x.png"; sourceTree = "<group>"; };
+		891507252492068A0040D38C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/qrcode_scan_btn_opentorch_normal@2x.png"; sourceTree = "<group>"; };
+		891507272492068F0040D38C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/qrcode_scan_btn_opentorch_normal@2x.png"; sourceTree = "<group>"; };
+		89150728249206930040D38C /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = "ja.lproj/qrcode_scan_btn_opentorch_normal@2x.png"; sourceTree = "<group>"; };
+		8915072A2492069C0040D38C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/qrcode_scan_btn_qa_normal@2x.png"; sourceTree = "<group>"; };
+		8915072C249206A20040D38C /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/qrcode_scan_btn_qa_normal@2x.png"; sourceTree = "<group>"; };
+		8915072D249206A60040D38C /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = "ja.lproj/qrcode_scan_btn_qa_normal@2x.png"; sourceTree = "<group>"; };
 		892C600F2079A9C4006301C1 /* QuickQRCodeDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickQRCodeDetector.h; sourceTree = "<group>"; };
 		892C60102079A9C4006301C1 /* QuickQRCodeDetector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickQRCodeDetector.m; sourceTree = "<group>"; };
 		89B310FB1FFB7CD9000D07CB /* QRCodeUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QRCodeUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,13 +113,6 @@
 		89B311301FFB8B60000D07CB /* QuickQRCodeScanController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickQRCodeScanController.m; sourceTree = "<group>"; };
 		89B311341FFC718F000D07CB /* navbar_return@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar_return@3x.png"; sourceTree = "<group>"; };
 		89B311351FFC718F000D07CB /* navbar_return@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar_return@2x.png"; sourceTree = "<group>"; };
-		89B311381FFC9DD2000D07CB /* qrcode_scan_btn_album_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_scan_btn_album_highlight@2x.png"; sourceTree = "<group>"; };
-		89B311391FFC9DD3000D07CB /* qrcode_scan_btn_myqrcode_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_scan_btn_myqrcode_highlight@2x.png"; sourceTree = "<group>"; };
-		89B3113A1FFC9DD3000D07CB /* qrcode_scan_btn_opentorch_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_scan_btn_opentorch_normal@2x.png"; sourceTree = "<group>"; };
-		89B3113B1FFC9DD3000D07CB /* qrcode_scan_btn_album_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_scan_btn_album_normal@2x.png"; sourceTree = "<group>"; };
-		89B3113D1FFC9DD3000D07CB /* qrcode_scan_btn_qa_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_scan_btn_qa_normal@2x.png"; sourceTree = "<group>"; };
-		89B3113E1FFC9DD3000D07CB /* qrcode_scan_btn_closetorch_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_scan_btn_closetorch_normal@2x.png"; sourceTree = "<group>"; };
-		89B3113F1FFC9DD3000D07CB /* qrcode_scan_btn_myqrcode_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_scan_btn_myqrcode_normal@2x.png"; sourceTree = "<group>"; };
 		89B311491FFC9F79000D07CB /* QuickQRCodeScanView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickQRCodeScanView.h; sourceTree = "<group>"; };
 		89B3114A1FFC9F79000D07CB /* QuickQRCodeScanView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickQRCodeScanView.m; sourceTree = "<group>"; };
 		89B3114D1FFC9FB5000D07CB /* QuickQRCodeScanViewStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickQRCodeScanViewStyle.h; sourceTree = "<group>"; };
@@ -249,13 +263,13 @@
 			children = (
 				89B3115D1FFCBD91000D07CB /* qrcode_scan_grid.png */,
 				89B3115E1FFCBD91000D07CB /* qrcode_scan_line@2x.png */,
-				89B311381FFC9DD2000D07CB /* qrcode_scan_btn_album_highlight@2x.png */,
-				89B3113B1FFC9DD3000D07CB /* qrcode_scan_btn_album_normal@2x.png */,
-				89B3113E1FFC9DD3000D07CB /* qrcode_scan_btn_closetorch_normal@2x.png */,
-				89B311391FFC9DD3000D07CB /* qrcode_scan_btn_myqrcode_highlight@2x.png */,
-				89B3113F1FFC9DD3000D07CB /* qrcode_scan_btn_myqrcode_normal@2x.png */,
-				89B3113A1FFC9DD3000D07CB /* qrcode_scan_btn_opentorch_normal@2x.png */,
-				89B3113D1FFC9DD3000D07CB /* qrcode_scan_btn_qa_normal@2x.png */,
+				89150710249206360040D38C /* qrcode_scan_btn_album_highlight@2x.png */,
+				8915070D249205660040D38C /* qrcode_scan_btn_album_normal@2x.png */,
+				89150717249206550040D38C /* qrcode_scan_btn_closetorch_normal@2x.png */,
+				8915071C249206670040D38C /* qrcode_scan_btn_myqrcode_highlight@2x.png */,
+				89150721249206780040D38C /* qrcode_scan_btn_myqrcode_normal@2x.png */,
+				891507262492068A0040D38C /* qrcode_scan_btn_opentorch_normal@2x.png */,
+				8915072B2492069C0040D38C /* qrcode_scan_btn_qa_normal@2x.png */,
 				89B311351FFC718F000D07CB /* navbar_return@2x.png */,
 				89B311341FFC718F000D07CB /* navbar_return@3x.png */,
 				89B311191FFB826F000D07CB /* Info.plist */,
@@ -434,18 +448,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89B311431FFC9DD3000D07CB /* qrcode_scan_btn_album_normal@2x.png in Resources */,
+				8915070B249205660040D38C /* qrcode_scan_btn_album_normal@2x.png in Resources */,
 				89B311251FFB839F000D07CB /* Localizable.strings in Resources */,
 				89B3115F1FFCBD91000D07CB /* qrcode_scan_grid.png in Resources */,
-				89B311461FFC9DD3000D07CB /* qrcode_scan_btn_closetorch_normal@2x.png in Resources */,
+				89150715249206550040D38C /* qrcode_scan_btn_closetorch_normal@2x.png in Resources */,
 				89B311601FFCBD91000D07CB /* qrcode_scan_line@2x.png in Resources */,
 				89B311361FFC7190000D07CB /* navbar_return@3x.png in Resources */,
-				89B311411FFC9DD3000D07CB /* qrcode_scan_btn_myqrcode_highlight@2x.png in Resources */,
-				89B311471FFC9DD3000D07CB /* qrcode_scan_btn_myqrcode_normal@2x.png in Resources */,
+				8915071A249206670040D38C /* qrcode_scan_btn_myqrcode_highlight@2x.png in Resources */,
+				8915071F249206780040D38C /* qrcode_scan_btn_myqrcode_normal@2x.png in Resources */,
 				89B311371FFC7190000D07CB /* navbar_return@2x.png in Resources */,
-				89B311451FFC9DD3000D07CB /* qrcode_scan_btn_qa_normal@2x.png in Resources */,
-				89B311421FFC9DD3000D07CB /* qrcode_scan_btn_opentorch_normal@2x.png in Resources */,
-				89B311401FFC9DD3000D07CB /* qrcode_scan_btn_album_highlight@2x.png in Resources */,
+				891507292492069C0040D38C /* qrcode_scan_btn_qa_normal@2x.png in Resources */,
+				891507242492068A0040D38C /* qrcode_scan_btn_opentorch_normal@2x.png in Resources */,
+				8915070E249206360040D38C /* qrcode_scan_btn_album_highlight@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +542,76 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		8915070D249205660040D38C /* qrcode_scan_btn_album_normal@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8915070C249205660040D38C /* zh-Hans */,
+				89150713249206460040D38C /* en */,
+				891507142492064E0040D38C /* ja */,
+			);
+			name = "qrcode_scan_btn_album_normal@2x.png";
+			sourceTree = "<group>";
+		};
+		89150710249206360040D38C /* qrcode_scan_btn_album_highlight@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8915070F249206360040D38C /* zh-Hans */,
+				891507112492063C0040D38C /* en */,
+				89150712249206420040D38C /* ja */,
+			);
+			name = "qrcode_scan_btn_album_highlight@2x.png";
+			sourceTree = "<group>";
+		};
+		89150717249206550040D38C /* qrcode_scan_btn_closetorch_normal@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				89150716249206550040D38C /* zh-Hans */,
+				89150718249206590040D38C /* en */,
+				891507192492065B0040D38C /* ja */,
+			);
+			name = "qrcode_scan_btn_closetorch_normal@2x.png";
+			sourceTree = "<group>";
+		};
+		8915071C249206670040D38C /* qrcode_scan_btn_myqrcode_highlight@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8915071B249206670040D38C /* zh-Hans */,
+				8915071D2492066D0040D38C /* ja */,
+				8915071E249206710040D38C /* en */,
+			);
+			name = "qrcode_scan_btn_myqrcode_highlight@2x.png";
+			sourceTree = "<group>";
+		};
+		89150721249206780040D38C /* qrcode_scan_btn_myqrcode_normal@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				89150720249206780040D38C /* zh-Hans */,
+				891507222492067E0040D38C /* ja */,
+				89150723249206820040D38C /* en */,
+			);
+			name = "qrcode_scan_btn_myqrcode_normal@2x.png";
+			sourceTree = "<group>";
+		};
+		891507262492068A0040D38C /* qrcode_scan_btn_opentorch_normal@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				891507252492068A0040D38C /* zh-Hans */,
+				891507272492068F0040D38C /* en */,
+				89150728249206930040D38C /* ja */,
+			);
+			name = "qrcode_scan_btn_opentorch_normal@2x.png";
+			sourceTree = "<group>";
+		};
+		8915072B2492069C0040D38C /* qrcode_scan_btn_qa_normal@2x.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8915072A2492069C0040D38C /* zh-Hans */,
+				8915072C249206A20040D38C /* en */,
+				8915072D249206A60040D38C /* ja */,
+			);
+			name = "qrcode_scan_btn_qa_normal@2x.png";
+			sourceTree = "<group>";
+		};
 		89B311271FFB839F000D07CB /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -663,7 +747,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202006110001;
+				CURRENT_PROJECT_VERSION = 202006110002;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -672,7 +756,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -703,7 +787,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202006110001;
+				CURRENT_PROJECT_VERSION = 202006110002;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -712,7 +796,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -743,12 +827,12 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = NO;
-				CURRENT_PROJECT_VERSION = 202006110001;
+				CURRENT_PROJECT_VERSION = 202006110002;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/QRCodeUIKitBundle/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lessney.QRCodeUIKitResource;
 				PRODUCT_NAME = QRCodeUIKit;
 				SDKROOT = iphoneos;
@@ -763,12 +847,12 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = NO;
-				CURRENT_PROJECT_VERSION = 202006110001;
+				CURRENT_PROJECT_VERSION = 202006110002;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/QRCodeUIKitBundle/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lessney.QRCodeUIKitResource;
 				PRODUCT_NAME = QRCodeUIKit;
 				SDKROOT = iphoneos;

@@ -14,7 +14,7 @@
 "Scan Result" = "スキャン結果";
 "PressCopyTip" = "*スキャン結果をコピーするには、点線のフレームを押し続けます。";
 
-"StartScanAccessTitle" = "QRコードスキャンの旅を始めましょう";
+"StartScanAccessTitle" = "スキャンを開始";
 "StartScanAccessDesc" = "カメラでqrcode /バーコードをスキャンするか、フォトライブラリからqrcode /バーコードイメージを認識するアクセスを許可します。";
 "CameraNotSupport" = "お使いのデバイスはカメラ機能をサポートしていません";
 "RequestCameraAuthText" = "允カメラへのアクセスを許可";
