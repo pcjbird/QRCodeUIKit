@@ -101,6 +101,7 @@
     if(_captureSession && _captureSession.running) [_captureSession stopRunning];
     [_scanView stopScanAnimation];
     [super viewWillDisappear:animated];
+    self.qrcodeuikit_NavBarBgAlpha = @"1.0";
     if(!_translucent)
     {
         self.navigationController.navigationBar.translucent = NO;

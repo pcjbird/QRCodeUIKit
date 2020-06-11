@@ -73,6 +73,7 @@
 		890479791FFBCCCB00B0DA41 /* UIViewController+QRCodeUIKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+QRCodeUIKit.m"; sourceTree = "<group>"; };
 		8904797C1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+QRCodeUIKit.h"; sourceTree = "<group>"; };
 		8904797D1FFBCD7B00B0DA41 /* UINavigationController+QRCodeUIKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+QRCodeUIKit.m"; sourceTree = "<group>"; };
+		891506522491EA990040D38C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		892C600F2079A9C4006301C1 /* QuickQRCodeDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickQRCodeDetector.h; sourceTree = "<group>"; };
 		892C60102079A9C4006301C1 /* QuickQRCodeDetector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickQRCodeDetector.m; sourceTree = "<group>"; };
 		89B310FB1FFB7CD9000D07CB /* QRCodeUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QRCodeUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -407,6 +408,7 @@
 			knownRegions = (
 				en,
 				"zh-Hans",
+				ja,
 			);
 			mainGroup = 89B310F11FFB7CD9000D07CB;
 			productRefGroup = 89B310FC1FFB7CD9000D07CB /* Products */;
@@ -531,6 +533,7 @@
 			children = (
 				89B311261FFB839F000D07CB /* en */,
 				89B311281FFB83B2000D07CB /* zh-Hans */,
+				891506522491EA990040D38C /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -660,6 +663,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 202006110001;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -668,6 +672,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 1.2.1;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -698,6 +703,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 202006110001;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -706,6 +712,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 1.2.1;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -736,10 +743,12 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = NO;
+				CURRENT_PROJECT_VERSION = 202006110001;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/QRCodeUIKitBundle/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lessney.QRCodeUIKitResource;
 				PRODUCT_NAME = QRCodeUIKit;
 				SDKROOT = iphoneos;
@@ -754,10 +763,12 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = NO;
+				CURRENT_PROJECT_VERSION = 202006110001;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/QRCodeUIKitBundle/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lessney.QRCodeUIKitResource;
 				PRODUCT_NAME = QRCodeUIKit;
 				SDKROOT = iphoneos;

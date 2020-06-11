@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  QRCodeUIKit
+
+  Created by pcjbird on 2018/1/2.
+  Copyright © 2018年 Zero Status. All rights reserved.
+*/
+"Scan" = "スキャン";
+"ScanTip" = "二次元コードを枠内に入れてください";
+"BarCodeScanTip" = "バーコードを枠内に入れてください";
+"Your device has no torch." = "あなたの設備はフラッシュをサポートしていません。";
+"unknown qrcode"="認識できない二次元コード";
+"unknown barcode"="認識できないバーコード";
+"Scan Result" = "スキャン結果";
+"PressCopyTip" = "*スキャン結果をコピーするには、点線のフレームを押し続けます。";
+
+"StartScanAccessTitle" = "QRコードスキャンの旅を始めましょう";
+"StartScanAccessDesc" = "カメラでqrcode /バーコードをスキャンするか、フォトライブラリからqrcode /バーコードイメージを認識するアクセスを許可します。";
+"CameraNotSupport" = "お使いのデバイスはカメラ機能をサポートしていません";
+"RequestCameraAuthText" = "允カメラへのアクセスを許可";
+"CameraAuthDeniedText" = "カメラが禁止されました";
+"CameraAuthAllowedText" = "カメラへのアクセスは既に許可されています";
+"RequestAlbumAuthText" = "写真ライブラリへのアクセスを許可する";
+"AlbumAuthDeniedText" = "あなたのアルバムは禁止されました";
+"AlbumAutAllowedText" = "写真ライブラリへのアクセスは既に許可されています";
+"Go Setting" = "設定に移動";

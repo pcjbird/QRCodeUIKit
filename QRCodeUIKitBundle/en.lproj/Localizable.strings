@@ -16,12 +16,12 @@
 
 
 "StartScanAccessTitle" = "Start Your Scan";
-"StartScanAccessDesc" = "Allow access to scan qr or barcode information through your camera, and also identify qr or barcode images from the album.";
+"StartScanAccessDesc" = "Allow access to scan qrcode/barcode with your camera, or recognize qrcode/barcode images from the photo library.";
 "CameraNotSupport" = "Camera not support for your device.";
 "RequestCameraAuthText" = "Allow Access to Your Camera";
 "CameraAuthDeniedText" = "Your Camera Access is Denied";
 "CameraAuthAllowedText" = "Your Camera Access Already Allowed";
-"RequestAlbumAuthText" = "Allow Access to Your Photo Album";
-"AlbumAuthDeniedText" = "Your Photo Album Access is Denied";
-"AlbumAutAllowedText" = "YourPhoto Album Access Already Allowed";
+"RequestAlbumAuthText" = "Allow Access to Your Photo Library";
+"AlbumAuthDeniedText" = "Your Photo Library Access is Denied";
+"AlbumAutAllowedText" = "Your Photo Library Access Already Allowed";
 "Go Setting" = "Go Setting";
