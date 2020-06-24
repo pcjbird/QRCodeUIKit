@@ -97,6 +97,14 @@
 		8915072D249206A60040D38C /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = "ja.lproj/qrcode_scan_btn_qa_normal@2x.png"; sourceTree = "<group>"; };
 		892C600F2079A9C4006301C1 /* QuickQRCodeDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickQRCodeDetector.h; sourceTree = "<group>"; };
 		892C60102079A9C4006301C1 /* QuickQRCodeDetector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuickQRCodeDetector.m; sourceTree = "<group>"; };
+		8984922524A33B440057BEB3 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hant"; path = "zh-Hant.lproj/qrcode_scan_btn_album_highlight@2x.png"; sourceTree = "<group>"; };
+		8984922624A33B440057BEB3 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hant"; path = "zh-Hant.lproj/qrcode_scan_btn_album_normal@2x.png"; sourceTree = "<group>"; };
+		8984922724A33B440057BEB3 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hant"; path = "zh-Hant.lproj/qrcode_scan_btn_closetorch_normal@2x.png"; sourceTree = "<group>"; };
+		8984922824A33B440057BEB3 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hant"; path = "zh-Hant.lproj/qrcode_scan_btn_myqrcode_highlight@2x.png"; sourceTree = "<group>"; };
+		8984922924A33B440057BEB3 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hant"; path = "zh-Hant.lproj/qrcode_scan_btn_myqrcode_normal@2x.png"; sourceTree = "<group>"; };
+		8984922A24A33B440057BEB3 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hant"; path = "zh-Hant.lproj/qrcode_scan_btn_opentorch_normal@2x.png"; sourceTree = "<group>"; };
+		8984922B24A33B440057BEB3 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hant"; path = "zh-Hant.lproj/qrcode_scan_btn_qa_normal@2x.png"; sourceTree = "<group>"; };
+		8984922C24A33B450057BEB3 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		89B310FB1FFB7CD9000D07CB /* QRCodeUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QRCodeUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89B310FE1FFB7CD9000D07CB /* QRCodeUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRCodeUIKit.h; sourceTree = "<group>"; };
 		89B310FF1FFB7CD9000D07CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -423,6 +431,7 @@
 				en,
 				"zh-Hans",
 				ja,
+				"zh-Hant",
 			);
 			mainGroup = 89B310F11FFB7CD9000D07CB;
 			productRefGroup = 89B310FC1FFB7CD9000D07CB /* Products */;
@@ -548,6 +557,7 @@
 				8915070C249205660040D38C /* zh-Hans */,
 				89150713249206460040D38C /* en */,
 				891507142492064E0040D38C /* ja */,
+				8984922624A33B440057BEB3 /* zh-Hant */,
 			);
 			name = "qrcode_scan_btn_album_normal@2x.png";
 			sourceTree = "<group>";
@@ -558,6 +568,7 @@
 				8915070F249206360040D38C /* zh-Hans */,
 				891507112492063C0040D38C /* en */,
 				89150712249206420040D38C /* ja */,
+				8984922524A33B440057BEB3 /* zh-Hant */,
 			);
 			name = "qrcode_scan_btn_album_highlight@2x.png";
 			sourceTree = "<group>";
@@ -568,6 +579,7 @@
 				89150716249206550040D38C /* zh-Hans */,
 				89150718249206590040D38C /* en */,
 				891507192492065B0040D38C /* ja */,
+				8984922724A33B440057BEB3 /* zh-Hant */,
 			);
 			name = "qrcode_scan_btn_closetorch_normal@2x.png";
 			sourceTree = "<group>";
@@ -578,6 +590,7 @@
 				8915071B249206670040D38C /* zh-Hans */,
 				8915071D2492066D0040D38C /* ja */,
 				8915071E249206710040D38C /* en */,
+				8984922824A33B440057BEB3 /* zh-Hant */,
 			);
 			name = "qrcode_scan_btn_myqrcode_highlight@2x.png";
 			sourceTree = "<group>";
@@ -588,6 +601,7 @@
 				89150720249206780040D38C /* zh-Hans */,
 				891507222492067E0040D38C /* ja */,
 				89150723249206820040D38C /* en */,
+				8984922924A33B440057BEB3 /* zh-Hant */,
 			);
 			name = "qrcode_scan_btn_myqrcode_normal@2x.png";
 			sourceTree = "<group>";
@@ -598,6 +612,7 @@
 				891507252492068A0040D38C /* zh-Hans */,
 				891507272492068F0040D38C /* en */,
 				89150728249206930040D38C /* ja */,
+				8984922A24A33B440057BEB3 /* zh-Hant */,
 			);
 			name = "qrcode_scan_btn_opentorch_normal@2x.png";
 			sourceTree = "<group>";
@@ -608,6 +623,7 @@
 				8915072A2492069C0040D38C /* zh-Hans */,
 				8915072C249206A20040D38C /* en */,
 				8915072D249206A60040D38C /* ja */,
+				8984922B24A33B440057BEB3 /* zh-Hant */,
 			);
 			name = "qrcode_scan_btn_qa_normal@2x.png";
 			sourceTree = "<group>";
@@ -618,6 +634,7 @@
 				89B311261FFB839F000D07CB /* en */,
 				89B311281FFB83B2000D07CB /* zh-Hans */,
 				891506522491EA990040D38C /* ja */,
+				8984922C24A33B450057BEB3 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -747,7 +764,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202006110002;
+				CURRENT_PROJECT_VERSION = 202006240001;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -756,7 +773,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -787,7 +804,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202006110002;
+				CURRENT_PROJECT_VERSION = 202006240001;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -796,7 +813,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-iquote",
@@ -827,12 +844,12 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = NO;
-				CURRENT_PROJECT_VERSION = 202006110002;
+				CURRENT_PROJECT_VERSION = 202006240001;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/QRCodeUIKitBundle/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lessney.QRCodeUIKitResource;
 				PRODUCT_NAME = QRCodeUIKit;
 				SDKROOT = iphoneos;
@@ -847,12 +864,12 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = NO;
-				CURRENT_PROJECT_VERSION = 202006110002;
+				CURRENT_PROJECT_VERSION = 202006240001;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/QRCodeUIKitBundle/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lessney.QRCodeUIKitResource;
 				PRODUCT_NAME = QRCodeUIKit;
 				SDKROOT = iphoneos;

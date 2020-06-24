@@ -1,0 +1,26 @@
+/* 
+  Localizable.strings
+  QRCodeUIKit
+
+  Created by pcjbird on 2018/1/2.
+  Copyright © 2018年 Zero Status. All rights reserved.
+*/
+"Scan" = "掃一掃";
+"ScanTip" = "請將二維碼放入框內";
+"BarCodeScanTip" = "請將條碼放入框內";
+"Your device has no torch." = "您的設備不支持閃光燈。";
+"unknown qrcode"="無法識別的二維碼";
+"unknown barcode"="無法識別的條碼";
+"Scan Result" = "掃描結果";
+"PressCopyTip" = "*長按虛線框，複製掃描結果。";
+
+"StartScanAccessTitle" = "開啟您的掃碼之旅";
+"StartScanAccessDesc" = "允許訪問即可通過您的相機掃描二維碼或條碼信息，此外還可以識別來自相冊的二維碼或條碼圖片。";
+"CameraNotSupport" = "您的設備不支持相機功能";
+"RequestCameraAuthText" = "允許訪問您的相機";
+"CameraAuthDeniedText" = "您的相機已被禁止訪問";
+"CameraAuthAllowedText" = "您的相機已允許訪問";
+"RequestAlbumAuthText" = "允許訪問您的相冊";
+"AlbumAuthDeniedText" = "您的相冊已被禁止訪問";
+"AlbumAutAllowedText" = "您的相冊已允許訪問";
+"Go Setting" = "前往設置";
