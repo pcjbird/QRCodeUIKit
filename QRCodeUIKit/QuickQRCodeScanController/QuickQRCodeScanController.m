@@ -51,6 +51,8 @@
 
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 
+@property (nonatomic, strong) UINavigationBarAppearance *oldScrollEdgeAppearance API_AVAILABLE(ios(13.0));
+
 @end
 
 @implementation QuickQRCodeScanController
@@ -78,6 +80,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if (@available(iOS 15.0, *)) {
+        self.oldScrollEdgeAppearance = [[UINavigationBar appearance].scrollEdgeAppearance copy];
+        UINavigationBarAppearance *appearance = [[UINavigationBar appearance].scrollEdgeAppearance copy];
+        [appearance configureWithTransparentBackground];
+        [UINavigationBar appearance].scrollEdgeAppearance = appearance;
+    }
     _translucent = self.navigationController.navigationBar.translucent;
     if(!_translucent)
     {
@@ -101,6 +109,13 @@
     if(_captureSession && _captureSession.running) [_captureSession stopRunning];
     [_scanView stopScanAnimation];
     [super viewWillDisappear:animated];
+    if (@available(iOS 15.0, *)) {
+        if(self.oldScrollEdgeAppearance)
+        {
+            [UINavigationBar appearance].scrollEdgeAppearance = self.oldScrollEdgeAppearance;
+        }
+        
+    }
     self.qrcodeuikit_NavBarBgAlpha = @"1.0";
     if(!_translucent)
     {
