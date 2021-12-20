@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 #s.documentation_url = ''
 #s.screenshot       = ''
 
-    s.platform         = :ios, '8.0'
+    s.platform         = :ios, '9.0'
     s.frameworks       = 'Foundation', 'UIKit', 'CoreGraphics', 'AVFoundation', 'CoreImage', 'Photos'
 #s.preserve_paths   = ''
     s.source_files     = 'QRCodeUIKit/*.{h,m}', 'QRCodeUIKit/Categories/*.{h,m}'
