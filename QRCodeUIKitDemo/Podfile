@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, '8.0'
+platform :ios, '10.0'
 
 workspace 'QRCodeUIKitDemo.xcworkspace'
 project 'QRCodeUIKitDemo.xcodeproj'
@@ -9,6 +9,29 @@ target 'QRCodeUIKitDemo' do
   use_frameworks!
 
   # Pods for QRCodeUIKitDemo
-  pod 'QRCodeUIKit'
+  pod 'QRCodeUIKit', :path => '../'
   pod 'YYWebImage'
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 10.0
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
+      end
+    end
+#    if target.name == "ZIPFoundation"
+#      target.build_configurations.each do |config|
+#        config.build_settings['SWIFT_VERSION'] = '5.0'
+#      end
+#    end
+  end
+  
+  installer.pod_target_subprojects.flat_map { |p| p.targets }.each do |target|
+    target.build_configurations.each do |config|
+      if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 10.0
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
+      end
+    end
+  end
 end

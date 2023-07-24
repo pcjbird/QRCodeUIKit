@@ -241,7 +241,9 @@
         __weak typeof (self) weakSelf = self;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*0.3f), dispatch_get_main_queue(), ^{
             [weakSelf.scanView startScanAnimation];
-            if(weakSelf.captureSession && !weakSelf.captureSession.running) [weakSelf.captureSession startRunning];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                if(weakSelf.captureSession && !weakSelf.captureSession.running) [weakSelf.captureSession startRunning];
+            });
         });
         return YES;
     }
@@ -272,7 +274,14 @@
     layer.frame=self.view.layer.bounds;
     [self.view.layer insertSublayer:layer atIndex:0];
     //开始捕获
-    [_captureSession startRunning];
+    __weak typeof (self) weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        if(strongSelf)
+        {
+            [strongSelf->_captureSession startRunning];
+        }
+    });
     return TRUE;
 }
 
